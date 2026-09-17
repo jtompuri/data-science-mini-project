@@ -1,0 +1,38 @@
+Content of some selected columns left in
+
+Column:puheenvuoro.tilapuheenvuoro.tila
+Hyväksytty     84151
+Tarkistettu    47519
+Käsitelty       1369
+Luonnos            3
+
+Column:puheenvuoro.puheenvuorotyyppikoodipuheenvuoro.puheenvuorotyyppikoodi
+V    61744
+T    55388
+N     5681
+      4298
+E     3944
+R     1987
+
+Column:puheenvuoro.puheenvuorotyyppinimipuheenvuoro.puheenvuorotyyppinimi
+Vastauspuheenvuoro           61744
+Varsinainen puheenvuoro      55388
+Nopeatahtinen puheenvuoro     5681
+                              4298
+Esittelypuheenvuoro           3944
+Ryhmäpuheenvuoro              1987
+
+Column:puheenvuoro.valtiopaivapuheenvuoro.valtiopaiva
+2018 vp    15277
+2016 vp    13649
+2017 vp    13235
+2022 vp    12736
+2024 vp    12587
+2020 vp    12355
+2021 vp    12211
+2025 vp    11983
+2015 vp     8472
+2026 vp     7075
+2019 vp     6900
+2023 vp     6562
+
