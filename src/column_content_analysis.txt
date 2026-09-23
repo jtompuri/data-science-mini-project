@@ -6,13 +6,46 @@ Tarkistettu    47519
 Käsitelty       1369
 Luonnos            3
 
-Column:puheenvuoro.puheenvuorotyyppikoodipuheenvuoro.puheenvuorotyyppikoodi
-V    61744
-T    55388
-N     5681
-      4298
-E     3944
-R     1987
+Column:puheenvuoro.puhuja.lisatietopuheenvuoro.puhuja.lisatieto
+sd       26082
+ps       22430
+kok      19812
+kesk     19381
+         16582
+vihr      9373
+vas       8741
+kd        4960
+r         3674
+sin        906
+liik       411
+si         170
+vkk        125
+at          60
+uv          58
+tv          55
+erk         52
+kesk        26
+kp          25
+sd          18
+vihr        18
+kok         13
+wr          12
+tl          11
+ejuv         8
+ps           8
+PV           5
+r            5
+ kok         4
+vas          4
+ kesk        3
+ vihr        2
+kd           2
+TV           1
+ ps          1
+ vas         1
+ kd          1
+ sd          1
+ps           1
 
 Column:puheenvuoro.puheenvuorotyyppinimipuheenvuoro.puheenvuorotyyppinimi
 Vastauspuheenvuoro           61744

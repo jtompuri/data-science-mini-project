@@ -19,24 +19,31 @@ other_dropped_coloumns = ["puheenvuoro.historiallinen", "type", "puheenvuoro.tun
 data = data.drop(columns=other_dropped_coloumns)
 
 #Creating a support table for content analysis of selected columns
-column_content_analysis = data[["puheenvuoro.tila", "puheenvuoro.puheenvuorotyyppikoodi", "puheenvuoro.puheenvuorotyyppinimi", "puheenvuoro.valtiopaiva"]]
+column_content_analysis = data[["puheenvuoro.tila", "puheenvuoro.puhuja.lisatieto", "puheenvuoro.puheenvuorotyyppinimi", "puheenvuoro.valtiopaiva"]]
 
-with open('dropped_columns.txt', 'w') as f:
-    f.write("Following columns were empty and therefore dropped out:"+"\n")
-    for col in empty_columns:
-        f.write(col + '\n')
-    f.write("\n")
-    f.write("Following columns were not seen relevant and therefore dropped out:")
-    for col in other_dropped_coloumns:
+def generate_documents():
+    with open('dropped_columns.txt', 'w') as f:
+        f.write("Following columns were empty and therefore dropped out:"+"\n")
+        for col in empty_columns:
             f.write(col + '\n')
-
-with open('column_content_analysis.txt', 'w') as f:
-    f.write("Content of some selected columns left in"+"\n")
-    f.write("\n")
-    for column in column_content_analysis.columns:
-        f.write("Column:" + column)
-        f.write(data[column].value_counts().to_string())
         f.write("\n")
-        f.write("\n")
+        f.write("Following columns were not seen relevant and therefore dropped out:")
+        for col in other_dropped_coloumns:
+                f.write(col + '\n')
 
-data.to_json("cleaned_data.ndjson", orient="records", lines=True, force_ascii=False)
+    with open('column_content_analysis.txt', 'w') as f:
+        f.write("Content of some selected columns left in"+"\n")
+        f.write("\n")
+        for column in column_content_analysis.columns:
+            f.write("Column:" + column)
+            f.write(data[column].value_counts().to_string())
+            f.write("\n")
+            f.write("\n")
+
+#data.to_json("cleaned_data.ndjson", orient="records", lines=True, force_ascii=False)
+
+print(data["puheenvuoro.puhuja.lisatieto"].isna().sum())
+print(data["puheenvuoro.puhuja.lisatieto"].map(repr).value_counts().head(20))
+
+print(data["puheenvuoro.puheenvuoro"].isna().sum())
+generate_documents()
