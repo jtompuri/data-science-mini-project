@@ -1,4 +1,4 @@
-.# Party Map
+# Party Map
 
 How differently do Finnish parties speak in parliament, and has that changed over 2015–2026? Introduction to Data Science mini-project, University of Helsinki, autumn 2026. The plan is in `party-map-project-plan.md` and the method notes for the report are in `docs/methods.md`.
 
@@ -32,6 +32,7 @@ src/
   config.py                   shared definitions: parties, terms, governments, sample rules
   stopwords_fi.txt, stopwords_sv.txt   NLTK stop-word lists (frozen copies)
   stopwords_fi_style.txt      extra style words for the robustness run party_nostyle (notebook 05)
+  data_cleanup.py             column check of the raw export (see Source data)
 results/                      model outputs (csv/json) and summary_tables.md
 reports/figures/              figures (eda_*, tulokset_* in Finnish; res_* in English)
 docs/methods.md               paper summaries, design decisions, limitations (English)
@@ -80,13 +81,11 @@ Notebooks 04, 05 and 06 skip the heavy computation when their output files alrea
 
 All random steps are seeded, so the numbers repeat exactly. Everything in `Data/processed/` is derived and can be deleted.
 
-## Sourde data
+## Source data
 
-Parliament speaches have been rethrieved from https://www.eduskunta.fi/haku?category=puheenvuorot&alkuajankohta=2015-01-01&loppuajankohta=2026-09-15 as JSON format.
+The plenary speeches were retrieved from the Parliament of Finland search service as JSON: https://www.eduskunta.fi/haku?category=puheenvuorot&alkuajankohta=2015-01-01&loppuajankohta=2026-09-15 (speeches 1 Jan 2015 – 15 Sep 2026). The notebooks use the same export downloaded later (to 23 Sep 2026) as `Data/dataset-*.ndjson`.
 
-Speaches have been collected from 1.1.2015 to 15.9.2026.
-
-data_cleanup.py can be used for removing empty and unnessary columns as well as for analysing content of certain columns.
+`src/data_cleanup.py` removes empty and unnecessary columns from the export and summarises the content of selected columns. It reads `Kansanedustajien_puheet.ndjson` from the working directory and writes `src/dropped_columns.txt` and `src/column_content_analysis.txt`.
 
 ## Data not in the repository
 
@@ -101,6 +100,3 @@ data_cleanup.py can be used for removing empty and unnessary columns as well as 
 ## Data licence
 
 Parliament of Finland open data: CC BY 4.0. Yle election compass data: CC BY 4.0, anonymised; analysed at party level only.
-
-
-
