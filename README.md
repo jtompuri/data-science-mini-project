@@ -28,6 +28,7 @@ notebooks/                    the analysis, run in order
   09_vaalikone.ipynb          election-compass comparison 2015, 2019, 2023 (party positions vs. speech)
   10_sanat.ipynb              most distinctive words per party and term from classifier weights
   11_teemat.ipynb             separability within topics (Gronow & Malkamäki keywords), comparison with Twitter
+  90_sivupolut.ipynb          informal side notes for the blog (not part of the results); run after 06
 src/
   config.py                   shared definitions: parties, terms, governments, sample rules
   stopwords_fi.txt, stopwords_sv.txt   NLTK stop-word lists (frozen copies)
@@ -76,6 +77,7 @@ jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeou
 | 10 | ~2 min | fits 10 models per term to get the word weights |
 | 11 | ~1 min | needs the prediction files from 05 and the raw text from 01; also writes the speech-length check used by 07 |
 | 08 | ~1 min | English figures; run last |
+| 90 | ~1 min | optional side notes; needs the raw text from 01 and results of 05 and 06 |
 
 Notebooks 04, 05 and 06 skip the heavy computation when their output files already exist and read them instead; set `UUDELLEEN = True` at the top of the notebook to recompute. Notebooks 07, 08 and 09 need only `results/`, the election-compass files and `Data/processed/mp_terms.parquet` (35 kB, kept in git), so they run on a fresh clone without rebuilding the rest of `Data/processed/`.
 
