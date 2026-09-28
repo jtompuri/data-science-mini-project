@@ -1,0 +1,32 @@
+{
+ "2015-2019": {
+  "hallitus": {
+   "hallitus": 0.629,
+   "oppositio": 0.3737
+  },
+  "oppositio": {
+   "hallitus": 0.371,
+   "oppositio": 0.6263
+  }
+ },
+ "2019-2023": {
+  "hallitus": {
+   "hallitus": 0.664,
+   "oppositio": 0.32
+  },
+  "oppositio": {
+   "hallitus": 0.336,
+   "oppositio": 0.68
+  }
+ },
+ "2023-2027": {
+  "hallitus": {
+   "hallitus": 0.6983,
+   "oppositio": 0.3179
+  },
+  "oppositio": {
+   "hallitus": 0.3017,
+   "oppositio": 0.6821
+  }
+ }
+}
