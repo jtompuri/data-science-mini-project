@@ -1,4 +1,4 @@
-# Party Map
+.# Party Map
 
 How differently do Finnish parties speak in parliament, and has that changed over 2015–2026? Introduction to Data Science mini-project, University of Helsinki, autumn 2026. The plan is in `party-map-project-plan.md` and the method notes for the report are in `docs/methods.md`.
 
@@ -80,6 +80,14 @@ Notebooks 04, 05 and 06 skip the heavy computation when their output files alrea
 
 All random steps are seeded, so the numbers repeat exactly. Everything in `Data/processed/` is derived and can be deleted.
 
+## Sourde data
+
+Parliament speaches have been rethrieved from https://www.eduskunta.fi/haku?category=puheenvuorot&alkuajankohta=2015-01-01&loppuajankohta=2026-09-15 as JSON format.
+
+Speaches have been collected from 1.1.2015 to 15.9.2026.
+
+data_cleanup.py can be used for removing empty and unnessary columns as well as for analysing content of certain columns.
+
 ## Data not in the repository
 
 - **Speech export** (`Data/dataset-*.ndjson`, about 530 MB) is over GitHub's 100 MB file limit. Download the plenary speeches from the Parliament of Finland open data service as an NDJSON export and place the file in `Data/`. Notebook 01 reads any file matching `dataset-*.ndjson`.
@@ -93,3 +101,6 @@ All random steps are seeded, so the numbers repeat exactly. Everything in `Data/
 ## Data licence
 
 Parliament of Finland open data: CC BY 4.0. Yle election compass data: CC BY 4.0, anonymised; analysed at party level only.
+
+
+

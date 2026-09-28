@@ -1,0 +1,29 @@
+Following columns were empty and therefore dropped out:
+kansanedustaja
+summaryKansanedustaja
+valtiopaivaasia
+tapahtuma
+cmsSivu
+sisaltosivu
+tiedote
+tiedosto
+asiakirja
+aanestys
+yhteystieto
+_highlightResult
+_snippetResult
+puheenvuoro.puheenvuoroXml
+puheenvuoro.puheenjohtajanRepliikki
+
+Following columns were not seen relevant and therefore dropped out:puheenvuoro.historiallinen
+type
+puheenvuoro.tunnus.fi
+puheenvuoro.tunnus.sv
+puheenvuoro.poytakirjanasiankohta.sv.eduskuntatunnus
+puheenvuoro.poytakirjanasiankohta.sv.kohtanumero
+puheenvuoro.poytakirjanasiankohta.sv.nimeketeksti
+puheenvuoro.asiakirjaviitteet.fi
+puheenvuoro.asiakirjaviitteet.sv
+puheenvuoro.puheenjohtajanRepliikki.puheenjohtaja
+puheenvuoro.puheenjohtajanRepliikki.repliikki
+puheenvuoro.puheenjohtajanRepliikki.asiakohtaAsiakirjaViitteet
