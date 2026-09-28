@@ -19,7 +19,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
   1. Drop parenthetical insertions (interjections).
   2. Map €, $, %, § to words; replace other non-alphanumeric characters with spaces; lowercase.
   3. Remove stop words (the NLTK/Snowball Finnish list).
-  4. Stem with Porter2 (Snowball).
+  4. Stem with the Snowball Finnish stemmer (PyStemmer).
   5. Build **bigrams** of consecutive stems.
   6. Drop phrases that contain MP names, party names, chair addresses ("arvoisa puhemies") or months, plus a list of procedural phrases.
 - **Vocabulary thresholds** (copied from Gentzkow et al.): a phrase must be used ≥100 times in total, ≥10 times in at least one year, and by ≥10 distinct speaker-years. The result is about 53,000 bigrams.
@@ -35,7 +35,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
   - Left-right partisanship peaked in the 1970s, driven by the SKDL (the pro-Soviet far left).
   - Partisanship has risen since the 1990s but is modest historically: about 0.502–0.506, far below the US.
   - Government-opposition differences appear from the 1970s and rise after the mid-1990s.
-  - The paper's own caveat: Porter stemming splits Finnish lemmas (e.g. *kotihoido tuen / tuke*).
+  - The paper's own caveat: rule-based stemming splits Finnish lemmas (e.g. *kotihoido tuen / tuke*).
 
 ### Simola, Nieminen & Tukiainen (2025, *Scientific Data*) – dataset descriptor
 
@@ -59,7 +59,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
   - Simulations.
   - **Out-of-sample validation**: learn phrase partisanship on one part of the speakers and predict on others (5 partitions).
 - **Inference:** subsampling (100 subsamples of 1/10 of speakers). A plain bootstrap is invalid for the lasso.
-- **Preprocessing:** stop words, Porter2 stems, bigrams, removal of procedural phrases, the same frequency thresholds as above.
+- **Preprocessing:** stop words, Snowball Finnish stems, bigrams, removal of procedural phrases, the same frequency thresholds as above.
 - **Warning relevant to us:** they criticise measuring partisanship by **classifier accuracy** (Peterson & Spirling 2018). Classifier accuracy also shows spurious, time-varying "partisanship" on data where party labels are random. **Any classifier-based measure must therefore be reported next to its permutation baseline, with the amount of training data held constant across periods.**
 - **Finding:** US congressional partisanship was flat until about 1990, then rose sharply.
 
@@ -90,7 +90,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
 | Interjections | parenthetical text dropped | `[...]` and `(...)` dropped | same |
 | Names / parties / procedure | phrases containing them dropped | tokens removed and replaced by a break marker, so no bigram spans them; names removed if capitalised (ambiguous names such as *Rinne*, *Aalto*, *Toimi* only mid-sentence) | same effect; avoids deleting common words |
 | Stop words | NLTK Finnish | NLTK Finnish | same |
-| Stemming | Porter2 (Snowball) | Snowball Finnish (PyStemmer) | same; lemmatisation (e.g. Voikko / Turku parser) is a possible robustness check |
+| Stemming | "Porter2" (Snowball; presumably its Finnish algorithm) | Snowball Finnish (PyStemmer) | same; lemmatisation (e.g. Voikko / Turku parser) is a possible robustness check |
 | Phrases | bigrams | **unigrams + bigrams** for the classifier (Finnish compounds carry meaning in single words); **bigrams only** for the leave-out estimator | classifier benefits from unigrams; leave-out replicates the paper |
 | Vocabulary thresholds | ≥100 total, ≥10 in one year, ≥10 speaker-years | same → 26,209 phrases (13,468 unigrams, 12,741 bigrams) | same |
 | Unit | speaker-year | **speech** for the classifier; speaker-term and speaker-year for leave-out | the project classifies individual speeches |
@@ -144,7 +144,7 @@ Page numbers: Simola et al. = ACE Discussion Paper 160 (May 2023, the version in
 | numbers | kept, p. 47 | – | removed | years and bill numbers mark time and agenda, not party |
 | hyphens | to spaces, p. 47 | deleted, p. 1311 | to spaces (as Simola) | – |
 | stop words | list p. 49 | Snowball list, pp. 1311–1312 | identical list (229/229 words) | – |
-| Porter2 stemming | p. 47 | p. 1312 | same | – |
+| Snowball stemming | p. 47 ("Porter2") | p. 1312 (English Porter2) | Snowball Finnish; Porter2 is the name of Snowball's English algorithm | – |
 | names, party names, *arvoisa puhemies*, months, procedural phrases | p. 48 | p. 1312 | removed as words with a break marker | same effect; known gap: *sosiaalidemokraat-*, *vasemmisto* (robustness run) |
 | bigrams | p. 10 | p. 1311 | unigrams + bigrams (classifier), bigrams (leave-out) | Finnish compounds carry meaning; Simola et al. mention unigrams as an option (p. 10) |
 | thresholds 100 / 10 per year / 10 speaker-years | p. 10 | p. 1312 | same | – |

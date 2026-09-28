@@ -9,7 +9,7 @@ scipy>=1.13
 
 # text + models
 scikit-learn>=1.5,<2
-PyStemmer>=2.2        # Snowball (Porter2) Finnish stemmer
+PyStemmer>=2.2        # Snowball Finnish stemmer
 
 # figures + tables
 matplotlib>=3.8
