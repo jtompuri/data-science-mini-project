@@ -172,19 +172,9 @@ for teema, nimi in NIMET.items():
         hovertemplate=nimi + ", %{x}: %{y:.2f}<extra></extra>"))
     paatepisteet[nimi] = sarja.iloc[-1]
 
-# nimiöt arvojärjestyksessä; pakotetaan vähimmäisväli, etteivät ne mene päällekkäin
-VALI = 0.032
-paikat = sorted(paatepisteet.items(), key=lambda p: -p[1])
-y_edellinen = None
-for nimi, y in paikat:
-    if y_edellinen is not None and y > y_edellinen - VALI:
-        y = y_edellinen - VALI
-    fig.add_annotation(x=KAUDET[-1], y=y, text=nimi, showarrow=False,
-                       xanchor="left", xshift=10, yanchor="middle",
-                       font={"size": 14, "color": VARIT[nimi]})
-    y_edellinen = y
-fig.update_layout(template="plotly_white", showlegend=False, height=460,
-                  margin={"t": 55, "b": 10, "l": 10, "r": 120},
+fig.update_layout(template="plotly_white", height=460,
+                  legend={"orientation": "h", "y": -0.18, "x": 0},
+                  margin={"t": 55, "b": 10, "l": 10, "r": 10},
                   font={"size": 14},
                   title={"text": "<b>Same topic, widening gap</b>",
                          "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
