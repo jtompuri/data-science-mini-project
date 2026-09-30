@@ -127,6 +127,9 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
 - **Party names** partly remained in the vocabulary: the cleaning pattern matches the official SDP spelling *sosialidemokraat-* but not the more common *sosiaalidemokraat-*, nor *vasemmisto* or *demareiden*. The run without style words also removes these, and the result does not change.
 - Classifier accuracy depends on training size and the number of classes, so both are held fixed, and results are read against the permutation baseline.
 
+- **Vocabulary thresholds use the full corpus.** The vocabulary and its frequency thresholds (notebook 04) are computed over all speeches, including those later used as test folds, following Gentzkow et al. The thresholds never see party labels, so this is not target leakage, but it is a design choice to state.
+- **Regularisation C was chosen without nested cross-validation.** C = 2 was picked by a coarse grid on the 2019–23 term with the same data the results are reported on. Sensitivity to C is small (see the tuning cell in notebook 05), so the optimism is negligible, but the choice is not nested.
+
 ## 4b. Source checklist (preprocessing and method warnings)
 
 Page numbers: Simola et al. = ACE Discussion Paper 160 (May 2023, the version in `Articles/`); the JHPE 2025 journal version has different pages. Gentzkow et al. = *Econometrica* 87(4), 1307–1340. Notebook 02 has the same table in Finnish.
@@ -199,9 +202,12 @@ Parties increasingly speak differently *about the same topic*. Part of this can 
 - **Distinctive words (notebook 10).** Per term, 10 models on 700 speeches per party from a random 80 % of MPs; weight = mean coefficient. Only phrases whose top user gives at most half of the party's use are shown.
 - **Topics (notebook 11).** Gronow & Malkamäki (2024, Table A1) keywords, substring matching, at least two hits per speech. *matu*, *rikka* and *krim* restricted to word starts (mostly false hits in parliament). Separability from the main model's out-of-fold predictions within the topic's speeches; six largest parties (15 pairs); a pair needs ≥ 30 topic speeches per party.
 - **Side notes (notebook 90).** Informal statistics for the blog, not used in the report's conclusions: frequency of the stem *polaris\** vs. separability and leave-out π; transcript reactions (interjections, laughter, noise, the Speaker's gavel) and who interjects at whom, with the interjector's party inferred from names or group names in the transcript (names are not reported); night sessions; year-on-year rising stems; idioms; party mentions; punctuation; per-party recall from the confusion matrix. All reported at party level. Transcription practice may change over time, and the idiom and party-mention searches are rough regular expressions.
+- **Result files (notebook 05).** MP profile files carry `person_id` only; MP names were dropped from all `*_mp_profiles.csv` (data minimisation — the public repo should not pair names with model estimates). Two-class runs (`government`) save only `_summary`, since the single pair equals the summary polarisation.
 - **Style words (notebook 05, run 5).** Three a-priori classes: colloquial forms, discourse particles and intensifiers, speech-act verbs. Stems shared with content words were left out after checking inflected forms (e.g. *kanssa* → *kans* = *kansa*).
 
 ## 7. Open items
+
+- **Done (30 Sep 2026): SDP name-leak fix and rerun.** The party-name regex in notebook 02 now also removes *sosiaalidemokraat-* (transcript spelling from ~2017) and *demareiden/demareita*; the full pipeline 02→04→05→06→10→11→08 was rerun. Measured effect: negligible. Vocabulary 26,209 → 26,203 phrases (exactly the six leaked stems). Classifier polarisation 0.389/0.451/0.559 → 0.391/0.451/0.558 (|Δ| ≤ 0.002, well inside the rep spread of ±0.02–0.04); leave-out π changed by ≤ 3×10⁻⁵; topic-level separability by ≤ 0.008; government vs opposition 2015–19 by −0.013. SDP's distinctive-word lists no longer contain party-name stems. The no-style-words run was byte-identical, as expected: it already excluded these stems, which also confirms the pipeline is deterministic. *vasemmisto\** removal remains a team decision.
 
 - Region (and gender) controls from the MP register, as in Simola et al.
 - Lemmatisation instead of stemming; learning curve over training size.

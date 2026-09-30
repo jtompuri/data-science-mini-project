@@ -161,7 +161,7 @@ Viikoittainen palaveri perjantaisin; rajaus- ja karsintapäätökset tehdään s
 - [ ] Herkkyystarkastelut: lemmatisointi vs. vartalointi; oppimiskäyrä opetusaineiston koon mukaan; esiintymisrajojen tiukennus 10 % (Gentzkow ym. s. 1312)
 - [x] Tyylisanatarkistus (muistio 05 ajo `party_nostyle`, 23.9.): polarisaatio 0,39 → 0,45 → 0,55, lähes sama kuin päätuloksessa
 - [x] Erottuvuus teemoittain ja vertailu Gronowin ja Malkamäen Twitter-tulokseen (muistio 11, 23.9.): kasvu näkyy kaikissa teemoissa
-- [ ] Täydennä muistion 02 puoluenimien lauseketta, kun siivous ajetaan seuraavan kerran uudelleen: SDP:stä molemmat kirjoitusasut (*sosialidemokraat-* on jo mukana, *sosiaalidemokraat-* puuttuu) sekä *vasemmisto* ja *demareiden*
+- [x] SDP:n nimivuoto korjattu ja putki ajettu uudelleen 30.9.: vaikutus mitätön (polarisaatio muuttui enintään 0,002; erot kirjattu methods.md §7). Tiimin päätettävä vielä *vasemmisto*-sanan poisto
 - [x] Vaalikoneen puolueprofiilit ja vaalikonevertailu 2015, 2019 ja 2023 (muistio 09, 23.9.)
 - [ ] Päätös: edustajatason vertailu 2015–19 (vaalikone 2015 vs. puheprofiili; korvaa plan B:n) – perjantain palaveri
 - [x] Painavimmat sanat puolueittain (kuva 3): muistio 10, `sanat_puolueittain.png` ja `res_top_words.png`. Havainto: RKP:n ja KD:n kärkisanoista moni on yhden edustajan maneeri; oman puolueen nimi jäi sanastoon (SDP, VIHR, VAS)
