@@ -269,6 +269,11 @@ lead the opposition, and the pairs across that line have become the most
 separable pairs in parliament — 0.66 on average, against 0.45 two terms ago.
 That coincidence is what produces the step in the first figure.
 
+And the lone dot at the edge of every map? The Swedish People's Party is
+separated by its subjects — education, the Swedish language, its regions —
+rather than by conflict with anyone. A useful reminder of what the map
+measures: speech, not positions.
+
 One more thing the data quietly rule out: the parties pulled apart, but
 **their MPs did not fall into line**. The spread of individual MPs around
 their own party's centre has not narrowed — parliament has not filled with
@@ -332,6 +337,23 @@ answers in the two most recent terms (Spearman 0.6–0.7 without the Swedish
 People's Party). Full details, robustness checks and code:
 [the technical report and repository](https://github.com/jtompuri/data-science-mini-project).
 :::
+
+## A century of perspective
+
+Is this the most divided Finnish parliament has ever been? Almost certainly
+not. @simola2023 ran essentially the same measurement over every plenary
+speech since 1907, and their century-long series peaks in the **1970s**,
+driven by the pro-Soviet far left — by their yardstick, Finnish
+parliamentary speech has been remarkably moderate for most of its history,
+and far below the levels measured in the US Congress. Partisanship has crept
+up since the 1990s, but gently.
+
+The intriguing part is where their series stops: **2018**, one term into our
+window. Our data pick up the story from there and find the clearest shift
+only after 2023. The two studies use different measures, so their levels
+cannot be laid on the same axis — but read together they suggest that
+whatever is happening in today's chamber, it is recent, and it was not yet
+visible when the century-long view was last taken.
 
 ## Side notes from the transcripts
 
