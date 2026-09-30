@@ -113,9 +113,11 @@ nav[role="doc-toc"] a,
 #TOC a {
   color: var(--ink);
 }
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.active,
 nav[role="doc-toc"] a.active,
 #TOC a.active {
-  color: var(--brand);
+  color: var(--brand) !important;
   border-left-color: var(--brand);
 }
 #toc-title { color: var(--ink-strong); }
