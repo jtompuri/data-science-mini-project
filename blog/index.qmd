@@ -224,6 +224,50 @@ lead the opposition, and the pairs across that line have become the most
 separable pairs in parliament — 0.66 on average, against 0.45 two terms ago.
 That coincidence is what produces the step in the first figure.
 
+One more thing the data quietly rule out: the parties pulled apart, but
+**their MPs did not fall into line**. The spread of individual MPs around
+their own party's centre has not narrowed — parliament has not filled with
+clones. The distance grew *between* the parties, not by discipline within
+them.
+
+## The words that give each party away
+
+What does the model actually latch onto? Its most party-revealing words are
+no mystery to anyone who follows Finnish politics — and that is the point:
+the machine rediscovers each party's signature vocabulary from scratch.
+A sample from the current term (Finnish word stems, translations in italics):
+
+::: {.word-row}
+[Finns]{.party-chip style="background:#C7A006"}
+[maahanmuutto *immigration*]{.w} [rikos *crime*]{.w} [veronmaksaja *taxpayer*]{.w}
+:::
+::: {.word-row}
+[Left]{.party-chip style="background:#F00A64"}
+[työntekijä *worker*]{.w} [pienituloinen *low-income*]{.w} [leikkaus *cut*]{.w}
+:::
+::: {.word-row}
+[SDP]{.party-chip style="background:#E11931"}
+[palkansaaja *wage earner*]{.w} [työelämä *working life*]{.w}
+:::
+::: {.word-row}
+[Greens]{.party-chip style="background:#61BF1A"}
+[ilmasto *climate*]{.w} [luonto *nature*]{.w} [päästöt *emissions*]{.w}
+:::
+::: {.word-row}
+[Centre]{.party-chip style="background:#006633"}
+[metsä *forest*]{.w} [maatalous *agriculture*]{.w} [Itä-Suomi *Eastern Finland*]{.w}
+:::
+::: {.word-row}
+[NCP]{.party-chip style="background:#006288"}
+[talous *economy*]{.w} [työ *work*]{.w} [uudistus *reform*]{.w}
+:::
+
+Role shows up too: whoever sits in opposition is recognisable by how much
+they talk about *the government* and *the prime minister*. And the model's
+confusions are as telling as its successes — the party it most often mistakes
+for another is the Christian Democrats, whose speeches it files under the
+National Coalition or the Finns Party.
+
 ::: {.callout-note}
 ## How we measured this
 
