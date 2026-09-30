@@ -226,12 +226,24 @@ for kausi in KAUDET:
     kartat[kausi] = xy
     edellinen = xy
 
+def nimiopaikat(xy):
+    """'top center' kaikille, paitsi törmäävän parin alempi piste saa nimiön alleen."""
+    paikat = ["top center"] * len(xy)
+    for i in range(len(xy)):
+        for j in range(len(xy)):
+            if i == j:
+                continue
+            if abs(xy[i, 0] - xy[j, 0]) < 0.11 and 0 <= xy[j, 1] - xy[i, 1] < 0.07:
+                paikat[i] = "bottom center"
+    return paikat
+
+
 def karttajalki(kausi):
     xy = kartat[kausi]
     return go.Scatter(
         x=xy[:, 0], y=xy[:, 1], mode="markers+text",
         text=[config.PARTY_SHORT_EN[p] for p in config.MAIN_PARTIES],
-        textposition="top center", textfont={"size": 14, "color": "#222"},
+        textposition=nimiopaikat(xy), textfont={"size": 14, "color": "#222"},
         marker={"size": 22, "color": [config.PARTY_COLORS[p] for p in config.MAIN_PARTIES],
                 "line": {"width": 2.5, "color": "white"}},
         hovertemplate="%{text}<extra></extra>", showlegend=False)
@@ -243,14 +255,16 @@ fig = go.Figure(
     data=[karttajalki(KAUDET[-1])],
     frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
 fig.update_layout(
-    template="plotly_white", height=500, plot_bgcolor="#f2e9db",
+    template="plotly_white", height=440, plot_bgcolor="#f2e9db",
     margin={"t": 85, "b": 10, "l": 10, "r": 10}, font={"size": 14},
     title={"text": "<b>A decade rearranges itself</b>",
            "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0, "y": 0.97},
     xaxis={"visible": False, "range": [-0.52, 0.52]},
-    yaxis={"visible": False, "scaleanchor": "x"},
+    yaxis={"visible": False, "scaleanchor": "x", "range": [-0.49, 0.46]},
     updatemenus=[{"type": "buttons", "direction": "right", "x": 0, "xanchor": "left",
                   "y": 1.10, "yanchor": "top",
+                  "bgcolor": "rgba(250, 246, 239, 0.6)", "bordercolor": "#1f4e79",
+                  "borderwidth": 1, "font": {"color": "#16283b", "size": 13},
                   "buttons": [{"label": kausi, "method": "animate",
                                "args": [[kausi], SIIRTYMA]} for kausi in KAUDET],
                   "active": 2}])
