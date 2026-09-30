@@ -211,3 +211,13 @@ Parties increasingly speak differently *about the same topic*. Part of this can 
 
 - **Decided 30 Sep 2026:** no FinBERT comparison, no region/gender controls and no further sensitivity checks (lemmatisation, learning curve, tighter frequency thresholds). The existing checks (permutation test, leave-out cross-check, no-minister and no-style-word runs, speech-length bins, within-topic separability) are judged sufficient for the course project. State in the report's limitations that Simola et al. control for region and gender and we do not.
 - Read a sample of speeches for the two surprising 2023–27 shifts: Left vs. SDP on immigration (0.13 → 0.63) and Centre vs. NCP on climate (0.25 → 0.65).
+
+## 8. Use of AI
+
+AI (Anthropic's Claude) was used in this project for:
+
+- research design: scoping the study, mapping it to the reference papers and planning the checks
+- producing code and figures: the analysis notebooks, helper modules and plots
+- producing and proofreading text: notebook prose, documentation and drafts
+
+The team members have reviewed the AI-produced text, figures and code.
