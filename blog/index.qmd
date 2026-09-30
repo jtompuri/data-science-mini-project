@@ -87,8 +87,12 @@ the leave-out estimator that @gentzkow2019 built for the US Congress and
 party pairs almost identically.
 
 That second yardstick can be computed year by year, and it sharpens the
-story: **flat from 2015 to 2022, rising from 2023 onwards.** What looks
-like a decade-long trend is closer to a step change during the current term.
+story. From 2015 to 2022 the line wobbles without a sustained trend — it
+drifts up in 2018–21, then falls back. **From 2023 it climbs above every
+earlier year and stays there.** What looks like a decade-long trend is
+closer to a step change during the current term (with one caveat: the
+partial year 2026 dips back towards the old range, so the last word belongs
+to the data still coming in).
 Part of the earlier rise even has a mundane explanation — speeches simply got
 longer, and longer speeches are easier to classify. The jump after 2023
 survives that correction.
@@ -116,7 +120,7 @@ fig.add_annotation(x=2024, y=float(v.loc[2024, "pi"]), text="the shift begins in
                    font={"size": 13, "color": "#1f4e79"})
 fig.update_layout(template="plotly_white", height=420, font={"size": 14},
                   margin={"t": 60, "b": 10},
-                  title={"text": "<b>Flat for eight years, then a shift</b>",
+                  title={"text": "<b>Eight years of wobble, then a shift</b>",
                          "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
                   yaxis={"title": "leave-out π"}, xaxis={"title": None, "dtick": 2},
                   legend={"orientation": "h", "y": 1.02, "x": 0})
