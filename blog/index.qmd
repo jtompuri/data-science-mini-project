@@ -44,8 +44,10 @@ parliamentary terms.
 
 Our headline measure is **separability**: how reliably two parties' speeches
 can be told apart (0 = indistinguishable, 1 = always distinguishable).
-Averaged over all 28 party pairs, it climbed from 0.39 to 0.45 to 0.56 across
-the three terms. That is not a gentle drift. Most of the move happens in one
+A separability of 0.56 means that, shown one speech from each of two
+parties, the model tells them apart correctly about 78 times in 100; a coin
+flip would score 50. Averaged over all 28 party pairs, the measure climbed
+from 0.39 to 0.45 to 0.56 across the three terms. That is not a gentle drift. Most of the move happens in one
 step.
 
 ```{python}
@@ -262,6 +264,8 @@ fig.update_layout(paper_bgcolor="rgba(0,0,0,0)")
 fig.show()
 ```
 
+The map has no fixed axes — distance is the only thing it shows — but by
+2023–27 its layout happens to reproduce the government–opposition divide.
 Three things stand out.
 
 **The right-side trio sounds alike everywhere.**
