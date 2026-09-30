@@ -187,7 +187,7 @@ and watch a decade of Finnish politics rearrange itself.
 ```{python}
 #| echo: false
 #| label: fig-map
-#| fig-cap: "Party map: parties the model confuses most often sit closest together (classical multidimensional scaling on the separability matrix). Colours are the parties' official colours; pick the term with the buttons. Axes have no fixed meaning."
+#| fig-cap: "Party map: parties the model confuses most often sit closest together (classical multidimensional scaling on the separability matrix). Colours are the parties' official colours; the buttons animate the moves between terms. Axes have no fixed meaning."
 import sys
 sys.path.insert(0, "../src")
 import config
@@ -204,17 +204,22 @@ for kausi in KAUDET:
     kartat[kausi] = xy
     edellinen = xy
 
-fig = go.Figure()
-for i, kausi in enumerate(KAUDET):
+def karttajalki(kausi):
     xy = kartat[kausi]
-    fig.add_trace(go.Scatter(
-        x=xy[:, 0], y=xy[:, 1], mode="markers+text", visible=(i == 2),
+    return go.Scatter(
+        x=xy[:, 0], y=xy[:, 1], mode="markers+text",
         text=[config.PARTY_SHORT_EN[p] for p in config.MAIN_PARTIES],
-        textposition="top center",
-        textfont={"size": 14, "color": "#222"},
+        textposition="top center", textfont={"size": 14, "color": "#222"},
         marker={"size": 22, "color": [config.PARTY_COLORS[p] for p in config.MAIN_PARTIES],
                 "line": {"width": 2.5, "color": "white"}},
-        hovertemplate="%{text}<extra></extra>", showlegend=False))
+        hovertemplate="%{text}<extra></extra>", showlegend=False)
+
+SIIRTYMA = {"frame": {"duration": 700, "redraw": False},
+            "mode": "immediate",
+            "transition": {"duration": 700, "easing": "cubic-in-out"}}
+fig = go.Figure(
+    data=[karttajalki(KAUDET[-1])],
+    frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
 fig.update_layout(
     template="plotly_white", height=500, plot_bgcolor="#f4f6f9",
     margin={"t": 85, "b": 10, "l": 10, "r": 10}, font={"size": 14},
@@ -224,9 +229,8 @@ fig.update_layout(
     yaxis={"visible": False, "scaleanchor": "x"},
     updatemenus=[{"type": "buttons", "direction": "right", "x": 0, "xanchor": "left",
                   "y": 1.10, "yanchor": "top",
-                  "buttons": [{"label": kausi, "method": "update",
-                               "args": [{"visible": [j == i for j in range(3)]}]}
-                              for i, kausi in enumerate(KAUDET)],
+                  "buttons": [{"label": kausi, "method": "animate",
+                               "args": [[kausi], SIIRTYMA]} for kausi in KAUDET],
                   "active": 2}])
 fig.show()
 ```
