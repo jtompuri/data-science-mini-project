@@ -171,11 +171,14 @@ nav[role="doc-toc"] a.active,
 
 /* --- Vuosisanat --- */
 .year-strip {
+  margin: 1rem 0 1.4rem;
+  font-family: var(--sans);
+}
+.year-strip p {
   display: flex;
   flex-wrap: wrap;
   gap: 0.55rem 0.4rem;
-  margin: 1rem 0 1.4rem;
-  font-family: var(--sans);
+  margin: 0;
 }
 .year-strip .chip {
   display: inline-block;
