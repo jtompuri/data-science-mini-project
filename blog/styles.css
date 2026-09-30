@@ -57,7 +57,7 @@ h1.title {
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.01em;
-  color: var(--ink-strong);
+  color: var(--brand-deep);
 }
 p.subtitle {
   font-family: var(--serif);

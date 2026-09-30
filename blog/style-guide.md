@@ -56,6 +56,10 @@ inside charts for non-party series.
 Rules of thumb:
 
 - Text is always an ink/muted token — never a party colour, never a chart hue.
+- The page title, subtitle and lede share `--brand-deep`, forming one navy
+  opening block on the warm top zone; section headings stay in
+  `--ink-strong` with the navy accent bar, so navy in running text keeps
+  its meaning (links, our measure).
 - Navy is the only colour that appears in both prose and charts; it marks
   "our measure".
 - Surfaces get no borders; separation comes from the tint itself.
