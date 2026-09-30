@@ -8,6 +8,7 @@ author:
 date: last-modified
 ---
 
+::: {.lead}
 At 7.57 on a May morning in 2021, the Speaker's gavel finally fell on the
 longest sitting of the decade. Parliament had argued about the EU recovery
 package all night — and 99 % of the small-hours speeches came from a single
@@ -19,6 +20,7 @@ cheap. So we measured it: we taught a computer to guess which party a speaker
 belongs to from a single plenary speech — no names, no party labels, just the
 words — and watched how much easier that guess has become over three
 parliamentary terms.
+:::
 
 ::: {.stat-grid}
 ::: {.stat-tile}
@@ -65,10 +67,14 @@ for sarja, nimi, vari, leveys in [("real", "party labels", "#1f4e79", 4),
         line={"color": vari, "width": leveys}, marker={"size": 12},
         error_y={"type": "data", "array": t["hi"] - t["mean"],
                  "arrayminus": t["mean"] - t["lo"], "thickness": 2}))
-fig.update_layout(margin={"t": 10, "b": 10}, yaxis_title="separability",
-                  xaxis_title=None, template="plotly_white", height=420,
+fig.add_annotation(x="2023-2027", y=0.56, text="the 2023 step", showarrow=True,
+                   arrowhead=2, ax=-70, ay=10, font={"size": 13, "color": "#1f4e79"})
+fig.update_layout(margin={"t": 60, "b": 10}, yaxis_title="separability",
+                  xaxis_title=None, template="plotly_white", height=440,
                   font={"size": 14},
-                  legend={"orientation": "h", "y": 1.08, "x": 0})
+                  title={"text": "<b>One step, not a slow drift</b>",
+                         "font": {"size": 19, "family": "Source Serif 4, Georgia, serif"}, "x": 0},
+                  legend={"orientation": "h", "y": 1.02, "x": 0})
 fig.show()
 ```
 
@@ -124,9 +130,11 @@ for teema, nimi in NIMET.items():
     fig.add_annotation(x=KAUDET[-1], y=sarja.iloc[-1], text=nimi, showarrow=False,
                        xanchor="left", xshift=10,
                        font={"size": 12.5, "color": VARIT[nimi]})
-fig.update_layout(template="plotly_white", showlegend=False, height=440,
-                  margin={"t": 10, "b": 10, "l": 10, "r": 105},
+fig.update_layout(template="plotly_white", showlegend=False, height=460,
+                  margin={"t": 55, "b": 10, "l": 10, "r": 105},
                   font={"size": 14},
+                  title={"text": "<b>Same topic, widening gap</b>",
+                         "font": {"size": 19, "family": "Source Serif 4, Georgia, serif"}, "x": 0},
                   yaxis={"title": "separability", "rangemode": "tozero"},
                   xaxis={"title": None})
 fig.show()
@@ -178,11 +186,13 @@ for i, kausi in enumerate(KAUDET):
                 "line": {"width": 2.5, "color": "white"}},
         hovertemplate="%{text}<extra></extra>", showlegend=False))
 fig.update_layout(
-    template="plotly_white", height=480,
-    margin={"t": 45, "b": 10, "l": 10, "r": 10}, font={"size": 14},
+    template="plotly_white", height=500,
+    margin={"t": 85, "b": 10, "l": 10, "r": 10}, font={"size": 14},
+    title={"text": "<b>A decade rearranges itself</b>",
+           "font": {"size": 19, "family": "Source Serif 4, Georgia, serif"}, "x": 0, "y": 0.97},
     xaxis={"visible": False}, yaxis={"visible": False, "scaleanchor": "x"},
     updatemenus=[{"type": "buttons", "direction": "right", "x": 0, "xanchor": "left",
-                  "y": 1.12, "yanchor": "top",
+                  "y": 1.10, "yanchor": "top",
                   "buttons": [{"label": kausi, "method": "update",
                                "args": [{"visible": [j == i for j in range(3)]}]}
                               for i, kausi in enumerate(KAUDET)],
