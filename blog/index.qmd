@@ -209,7 +209,7 @@ and watch a decade of Finnish politics rearrange itself.
 ```{python}
 #| echo: false
 #| label: fig-map
-#| fig-cap: "Party map: parties the model confuses most often sit closest together (classical multidimensional scaling on the separability matrix). Colours are the parties' official colours; the buttons animate the moves between terms. Axes have no fixed meaning."
+#| fig-cap: "Party map: parties the model confuses most often sit closest together (classical multidimensional scaling on the separability matrix). Colours are the parties' official colours; the buttons animate the moves between terms. Axes have no fixed meaning. Abbreviations (Finnish in brackets): NCP = National Coalition (KOK), Finns = Finns Party (PS), CD = Christian Democrats (KD), SPP = Swedish People's Party (RKP), Left = Left Alliance (VAS), Greens = Green League (VIHR), Centre = Centre Party (KESK), SDP = Social Democrats."
 import sys
 sys.path.insert(0, "../src")
 import config
@@ -269,12 +269,13 @@ opposition. Their speech is more similar than their election-compass answers
 would predict. Government status alone does not explain it: the five-party
 Marin government spoke *less* cohesively than its three-party opposition.
 
-**Close in views, far in voice.**
+**Close in views, far in voice.** The Left Alliance, the Social Democrats
+and the Greens —
 [Left]{.party-chip style="background:#c70853"}
 [SDP]{.party-chip style="background:#E11931"}
 [Greens]{.party-chip style="background:#3c7a10"}
-are among the closest pairs on the election compass, yet each speaks in its
-own register.
+— are among the closest pairs on the election compass, yet each speaks in
+its own register.
 
 **In 2023–27 the two dividing lines coincide for the first time.** The
 right-side trio is now the core of the government, the left-green parties
