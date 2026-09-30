@@ -32,7 +32,7 @@ parliamentary terms.
 [correct party guesses today — up from 1 in 4]{.lbl}
 :::
 ::: {.stat-tile}
-[0.39 → 0.56]{.num}
+[0.39 → 0.56]{.num .pitka}
 [separability of party pairs]{.lbl}
 :::
 ::: {.stat-tile}

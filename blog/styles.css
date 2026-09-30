@@ -25,6 +25,9 @@
   color: #1f4e79;
   white-space: nowrap;
 }
+.stat-tile .num.pitka {
+  font-size: clamp(1.25rem, 3.4vw, 1.65rem);
+}
 .stat-tile .lbl {
   display: block;
   font-size: 0.82rem;
