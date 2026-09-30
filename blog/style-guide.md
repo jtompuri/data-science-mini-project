@@ -77,3 +77,20 @@ Titles state the finding, not the variable ("One step, not a slow drift").
 Captions carry method and source in `--fs-xs`. Direct labels over legends
 when there are ≤ 5 series; annotations point at the one thing the reader
 should see.
+
+## Accessibility
+
+- All text/background pairs meet WCAG AA 4.5:1; party-chip backgrounds are
+  darkened shades of the official colours chosen to pass with white text
+  (Finns `#8a6f00`, Left `#c70853`, Greens `#3c7a10`; the official hues stay
+  on the map markers, where colour is graphic, paired with text labels).
+- Every number shown only in a figure is also stated in the prose, so the
+  page reads without the charts; captions carry method and source.
+- Identity is never colour-alone: map points and chips carry text labels,
+  chart series are directly labelled.
+- Known limitation: Plotly's term buttons and tooltips are not reachable by
+  keyboard (an upstream Plotly issue). The default view shows the current
+  term and the other terms' story is told in the prose, so no information is
+  interaction-locked.
+- The map animation runs only when the reader presses a button
+  (user-initiated motion; nothing autoplays).

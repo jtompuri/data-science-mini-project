@@ -239,7 +239,7 @@ Three things stand out.
 
 **The right-side trio sounds alike everywhere.**
 [NCP]{.party-chip style="background:#006288"}
-[Finns]{.party-chip style="background:#C7A006"}
+[Finns]{.party-chip style="background:#8a6f00"}
 [CD]{.party-chip style="background:#8E6CC8"}
 speak alike in every term — including 2019–23, when all three sat in
 opposition. Their speech is more similar than their election-compass answers
@@ -247,9 +247,9 @@ would predict. Government status alone does not explain it: the five-party
 Marin government spoke *less* cohesively than its three-party opposition.
 
 **Close in views, far in voice.**
-[Left]{.party-chip style="background:#F00A64"}
+[Left]{.party-chip style="background:#c70853"}
 [SDP]{.party-chip style="background:#E11931"}
-[Greens]{.party-chip style="background:#61BF1A"}
+[Greens]{.party-chip style="background:#3c7a10"}
 are among the closest pairs on the election compass, yet each speaks in its
 own register.
 
@@ -273,11 +273,11 @@ the machine rediscovers each party's signature vocabulary from scratch.
 A sample from the current term (Finnish word stems, translations in italics):
 
 ::: {.word-row}
-[Finns]{.party-chip style="background:#C7A006"}
+[Finns]{.party-chip style="background:#8a6f00"}
 [maahanmuutto *immigration*]{.w} [rikos *crime*]{.w} [veronmaksaja *taxpayer*]{.w}
 :::
 ::: {.word-row}
-[Left]{.party-chip style="background:#F00A64"}
+[Left]{.party-chip style="background:#c70853"}
 [työntekijä *worker*]{.w} [pienituloinen *low-income*]{.w} [leikkaus *cut*]{.w}
 :::
 ::: {.word-row}
@@ -285,7 +285,7 @@ A sample from the current term (Finnish word stems, translations in italics):
 [palkansaaja *wage earner*]{.w} [työelämä *working life*]{.w}
 :::
 ::: {.word-row}
-[Greens]{.party-chip style="background:#61BF1A"}
+[Greens]{.party-chip style="background:#3c7a10"}
 [ilmasto *climate*]{.w} [luonto *nature*]{.w} [päästöt *emissions*]{.w}
 :::
 ::: {.word-row}
