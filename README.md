@@ -31,6 +31,7 @@ notebooks/                    the analysis, run in order
   90_sivupolut.ipynb          informal side notes for the blog (not part of the results); run after 06
 src/
   config.py                   shared definitions: parties, terms, governments, sample rules
+  reporting.py                shared helpers for the results notebooks (07-09)
   stopwords_fi.txt, stopwords_sv.txt   NLTK stop-word lists (frozen copies)
   stopwords_fi_style.txt      extra style words for the robustness run party_nostyle (notebook 05)
   data_cleanup.py             column check of the raw export (see Source data)

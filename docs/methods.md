@@ -115,7 +115,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
   - **Relative diversity** is diversity divided by the mean distance between party centres. It separates "MPs of a party becoming alike" from "the classifier getting sharper".
   - Also reported: the mean probability the model gives to the MP's own party.
 - **Control task:** the same pipeline with government vs. opposition as the label.
-- **Cross-check:** Gentzkow et al.'s leave-out π for every party pair, on MP-term and MP-year bigram counts, with a permutation series and subsampling intervals.
+- **Cross-check:** Gentzkow et al.'s leave-out π for every party pair, on MP-term and MP-year bigram counts, with a permutation series (`pi_random` = mean of 4 label permutations per pair) and subsampling intervals.
 
 ## 4. Known limitations to state in the report
 

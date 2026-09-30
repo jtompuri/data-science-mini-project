@@ -64,9 +64,9 @@ Main cabinet of each term; the Finns Party counted as government in 2015–19.
 
 | term      |     pi |   pi_random |   gov vs opp pi |   gov vs opp pi, random |
 |:----------|-------:|------------:|----------------:|------------------------:|
-| 2015-2019 | 0.5196 |      0.4948 |          0.5141 |                  0.5006 |
-| 2019-2023 | 0.5246 |      0.4962 |          0.5199 |                  0.499  |
-| 2023-2027 | 0.5317 |      0.4942 |          0.5211 |                  0.4989 |
+| 2015-2019 | 0.5196 |      0.4956 |          0.5141 |                  0.5    |
+| 2019-2023 | 0.5246 |      0.4951 |          0.5199 |                  0.4994 |
+| 2023-2027 | 0.5317 |      0.4947 |          0.5211 |                  0.4997 |
 
 ## Election compass vs. speech in the following term (28 party pairs; 21 without SPP)
 
