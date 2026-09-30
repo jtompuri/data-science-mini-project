@@ -39,13 +39,17 @@ body {
   line-height: 1.75;
   color: var(--ink);
   background-color: var(--page);
-  /* Liuku on kiinnitetty näkymän yläreunaan: sävy ei vieri sisällön mukana,
-     vaan yläosassa on pysyvä lämmin vyöhyke. iOS-Safari ei tue fixediä
-     bodyssa ja palaa vierivään liukuun, mikä on kelvollinen varavaihtoehto.
-     Vierivä versio: poista background-attachment ja vaihda 85vh -> 760px. */
-  background-image: linear-gradient(180deg, var(--page-top) 0, rgba(250, 246, 239, 0) 85vh);
+  /* Vierivä liuku, pehmennetty ease-out-portain: ilman väliportaita
+     kahden pisteen liu'un loppuun jää näkyvä raja (Mach band). */
+  background-image: linear-gradient(
+    180deg,
+    rgba(243, 232, 213, 1) 0,
+    rgba(243, 232, 213, 0.83) 160px,
+    rgba(243, 232, 213, 0.58) 320px,
+    rgba(243, 232, 213, 0.32) 480px,
+    rgba(243, 232, 213, 0.12) 640px,
+    rgba(243, 232, 213, 0) 800px);
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 h1.title {
   font-family: var(--serif);
