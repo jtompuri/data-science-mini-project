@@ -92,6 +92,36 @@ Part of the earlier rise even has a mundane explanation — speeches simply got
 longer, and longer speeches are easier to classify. The jump after 2023
 survives that correction.
 
+```{python}
+#| echo: false
+#| label: fig-leaveout
+#| fig-cap: "Gentzkow–Shapiro–Taddy leave-out π by year, mean over the 28 party pairs (0.5 = parties indistinguishable from one phrase). Band: 10th–90th percentile of MP subsamples. 2026 covers January–September."
+lo = pd.read_csv("../results/leaveout_party_pairs_year.csv")
+v = lo.groupby("year")[["pi", "pi_random", "sub_lo", "sub_hi"]].mean()
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=list(v.index) + list(v.index[::-1]),
+                         y=list(v["sub_hi"]) + list(v["sub_lo"][::-1]),
+                         fill="toself", fillcolor="rgba(31,78,121,0.15)",
+                         line={"width": 0}, hoverinfo="skip", showlegend=False))
+fig.add_trace(go.Scatter(x=v.index, y=v["pi"], mode="lines+markers", name="party pairs",
+                         line={"color": "#1f4e79", "width": 4}, marker={"size": 10}))
+fig.add_trace(go.Scatter(x=v.index, y=v["pi_random"], mode="lines", name="random labels",
+                         line={"color": "#999999", "width": 2.5, "dash": "dot"}))
+for raja in [2018.5, 2022.5]:
+    fig.add_vline(x=raja, line={"color": "#bbb", "width": 1, "dash": "dash"})
+fig.add_annotation(x=2024, y=float(v.loc[2024, "pi"]), text="the shift begins in 2023",
+                   showarrow=True, arrowhead=2, ax=-10, ay=-45,
+                   font={"size": 13, "color": "#1f4e79"})
+fig.update_layout(template="plotly_white", height=420, font={"size": 14},
+                  margin={"t": 60, "b": 10},
+                  title={"text": "<b>Flat for eight years, then a shift</b>",
+                         "font": {"size": 19, "family": "Source Serif 4, Georgia, serif"}, "x": 0},
+                  yaxis={"title": "leave-out π"}, xaxis={"title": None, "dtick": 2},
+                  legend={"orientation": "h", "y": 1.02, "x": 0})
+fig.show()
+```
+
 ## It is not just that parties talk about different things
 
 An obvious objection: perhaps parties have not changed how they speak, only
@@ -281,7 +311,10 @@ number is reported against a shuffled-labels baseline — the precautions that
 @gentzkow2019 show are necessary before reading classifier accuracy as
 polarisation. Separability of a party pair is 2·AUC − 1 on the model's
 probabilities; our cross-check is the leave-out estimator used by
-@simola2023. Full details, robustness checks and code:
+@simola2023. The measure also passes an external check: party distances in
+speech correlate with the parties' distances on Yle's election-compass
+answers in the two most recent terms (Spearman 0.6–0.7 without the Swedish
+People's Party). Full details, robustness checks and code:
 [the technical report and repository](https://github.com/jtompuri/data-science-mini-project).
 :::
 
@@ -316,6 +349,11 @@ rate.
 [**2024** sovittelija]{.chip}
 [**2025** velkajarru]{.chip}
 :::
+
+**A party split you can hear.** When the Blue Reform group broke away from
+the Finns Party in 2017, its speech went with it: by language the breakaways
+sat as close to their coalition partner, the National Coalition (0.19), as to
+the party they had just left (0.21).
 
 **And the longest night** belongs to the EU recovery package: the sitting of
 12 May 2021 ended at 7.57 the next morning, and 99 % of the small-hours
