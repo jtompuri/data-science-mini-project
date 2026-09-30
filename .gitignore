@@ -1,0 +1,25 @@
+# Derived data (rebuilt by notebooks 01, 02, 04 and 05); the small MP table is kept for notebook 09
+Data/processed/*
+!Data/processed/mp_terms.parquet
+
+# Raw speech export: 530 MB, over GitHub's 100 MB file limit (see README: Data)
+Data/dataset-*.ndjson
+
+# Source articles: copyrighted PDFs, links are in party-map-project-plan.md
+Articles/
+
+# Outputs no longer produced by the notebooks (see archive/README.md)
+archive/
+
+# Quarto build outputs (blog and report, added ahead of use)
+blog/_site/
+blog/.quarto/
+report/_site/
+report/.quarto/
+
+# Environment and editor files
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+~$*

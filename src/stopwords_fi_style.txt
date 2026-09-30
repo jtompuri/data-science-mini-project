@@ -1,0 +1,30 @@
+# Tyylisanat: laajennettu täytesanalista robustisuustarkistukseen (muistio 05, ajo party_nostyle).
+# Sanat on valittu kolmesta luokasta etukäteen, ei mallin painojen perusteella.
+# Sanat vartaloidaan samalla Snowball-vartaloijalla kuin muistiossa 02.
+# Sanat, jotka ovat jo NLTK-listalla (stopwords_fi.txt), eivät muuta mitään.
+# Rivin alussa oleva # = kommentti.
+
+# 1. Puhekieliset muodot
+kyl kylhän kylläkin sit sitte sittenhän siel tääl tuol täält sielt tuolt tänne sinne tuonne
+mä sä mää sää mie sie meil teil niil mul sul sil tää toi noi nää noil näil
+et mut ku ni nii niinku tota noh joo juu eiks onks oisko ois olis oisin oisi ollu oo
+
+# 2. Diskurssipartikkelit, täytesanat ja vahvistimet
+tietysti tietenkin ehkä siis eli elikkä nimenomaan nimenomaisesti todella tosiaan tosiaankin
+oikeasti aivan ihan vain vaan jopa edes kuitenkin kuitenkaan myös myöskin myöskään toki
+varmasti varmaan toisaalta lähinnä sinänsä ylipäätään esimerkiksi ainakin juuri nyt jo vielä
+taas sitten näin noin täällä siellä tuolla tässä siinä melko hieman kyllä kai tavallaan
+sanotaan niin
+
+# 3. Puhetekoverbit
+todeta totean toteaa totesi todennut todettava todettu
+sanoa sanon sanoisin sanoi sanonut sanottava sanottu
+ajatella ajattelen ajattelisin ajattelee ajatellut
+haluta haluan halusin haluaisin halunnut
+toivoa toivon toivoisin toivottavasti
+
+# Jätetty pois, koska vartalo on yhteinen sisältösanan kanssa (yli 10 % esiintymistä sisältösanoja,
+# tarkistettu 20 000 puheen otoksesta):
+#   kanssa -> kans (= kansa), ikään kuin -> ikä (= ikä), oikeastaan -> oikea (= oikea),
+#   hyvin -> hyv (= hyvä), tietty -> tiety (= tietty "jokin"), muuten -> muute (= muuttaa),
+#   erityisesti -> erityis (= erityinen)
