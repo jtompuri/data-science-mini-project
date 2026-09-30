@@ -233,6 +233,12 @@ nav[role="doc-toc"] a.active,
 }
 .word-row .w i { color: var(--muted); font-size: 0.88em; }
 
+/* Puoluekartta: neliömäinen piirtoala keskitettynä */
+#fig-map {
+  max-width: 560px;
+  margin-inline: auto;
+}
+
 /* --- Kausinapit (HTML; Plotlyn SVG-napit eivät tottele sivun tyylejä) --- */
 .term-buttons {
   display: flex;
