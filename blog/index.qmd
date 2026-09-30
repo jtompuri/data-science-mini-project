@@ -55,15 +55,15 @@ import plotly.graph_objects as go
 
 s = pd.read_csv("../results/party_summary.csv")
 fig = go.Figure()
-for sarja, nimi, vari, leveys in [("real", "party labels", "#1f4e79", 4),
-                                  ("random", "random labels", "#8a94a0", 2.5)]:
+for sarja, nimi, vari, leveys in [("real", "party labels", "#1f4e79", 5),
+                                  ("random", "random labels", "#8a94a0", 3)]:
     t = s[s["series"] == sarja].groupby("term")["polarisation"].agg(
         mean="mean", lo=lambda x: x.quantile(0.1), hi=lambda x: x.quantile(0.9))
     fig.add_trace(go.Scatter(
         x=t.index, y=t["mean"], mode="lines+markers", name=nimi,
-        line={"color": vari, "width": leveys}, marker={"size": 12},
+        line={"color": vari, "width": leveys}, marker={"size": 13},
         error_y={"type": "data", "array": t["hi"] - t["mean"],
-                 "arrayminus": t["mean"] - t["lo"], "thickness": 2}))
+                 "arrayminus": t["mean"] - t["lo"], "thickness": 2.5}))
 fig.add_annotation(x="2023-2027", y=0.56, text="the 2023 step", showarrow=True,
                    arrowhead=2, ax=-72, ay=-38, standoff=8, xanchor="right",
                    font={"size": 13, "color": "#1f4e79"})
@@ -110,9 +110,9 @@ fig.add_trace(go.Scatter(x=list(v.index) + list(v.index[::-1]),
                          fill="toself", fillcolor="rgba(31,78,121,0.15)",
                          line={"width": 0}, hoverinfo="skip", showlegend=False))
 fig.add_trace(go.Scatter(x=v.index, y=v["pi"], mode="lines+markers", name="party pairs",
-                         line={"color": "#1f4e79", "width": 4}, marker={"size": 10}))
+                         line={"color": "#1f4e79", "width": 5}, marker={"size": 12}))
 fig.add_trace(go.Scatter(x=v.index, y=v["pi_random"], mode="lines", name="random labels",
-                         line={"color": "#8a94a0", "width": 2.5, "dash": "dot"}))
+                         line={"color": "#8a94a0", "width": 3, "dash": "dot"}))
 for raja in [2018.5, 2022.5]:
     fig.add_vline(x=raja, line={"color": "#bbb", "width": 1, "dash": "dash"})
 fig.add_annotation(x=2024, y=float(v.loc[2024, "pi"]), text="the shift begins in 2023",
@@ -163,7 +163,7 @@ for teema, nimi in NIMET.items():
     sarja = osa.groupby("term")["d"].mean().reindex(KAUDET)
     fig.add_trace(go.Scatter(
         x=KAUDET, y=sarja, mode="lines+markers", name=nimi,
-        line={"color": VARIT[nimi], "width": 3.5}, marker={"size": 11},
+        line={"color": VARIT[nimi], "width": 4.5}, marker={"size": 12},
         hovertemplate=nimi + ", %{x}: %{y:.2f}<extra></extra>"))
     fig.add_annotation(x=KAUDET[-1], y=sarja.iloc[-1], text=nimi, showarrow=False,
                        xanchor="left", xshift=10,
