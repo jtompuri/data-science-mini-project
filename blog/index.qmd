@@ -8,7 +8,7 @@ date: last-modified
 ::: {.lead}
 At 7.57am on a May morning in 2021, the Speaker's gavel finally fell on the
 longest sitting of the decade. Parliament had argued about the EU recovery
-package all night — and 99% of the small-hours speeches came from a single
+package all night, and 99% of the small-hours speeches came from a single
 party. Interjections shouted across the chamber have doubled since 2015. The
 word *polarisaatio* is uttered three times as often as a decade ago.
 
@@ -26,7 +26,7 @@ parliamentary terms.
 :::
 ::: {.stat-tile}
 [1 in 3]{.num}
-[correct party guesses today — up from 1 in 4]{.lbl}
+[correct party guesses today, up from 1 in 4]{.lbl}
 :::
 ::: {.stat-tile}
 [0.39 → 0.56]{.num .pitka}
@@ -80,19 +80,19 @@ fig.show()
 ```
 
 Why believe a computer's guessing game? Two checks. Shuffle the party labels
-and repeat everything, and the measure collapses to zero — the method invents
+and repeat everything, and the measure collapses to zero: the method invents
 nothing. And a completely different yardstick from the economics literature,
 the leave-out estimator that @gentzkow2019 built for the US Congress and
 @simola2023 applied to a century of Finnish parliamentary speech, ranks the
 party pairs almost identically.
 
 That second yardstick can be computed year by year, and it sharpens the
-story. From 2015 to 2022 the line wobbles without a sustained trend — it
+story. From 2015 to 2022 the line wobbles without a sustained trend: it
 drifts up in 2018–21, then falls back. **From 2023 it climbs above every
 earlier year and stays there.** What looks like a decade-long trend is
 closer to a step change during the current term, with one caveat: the
 partial year 2026 dips back towards the old range.
-Part of the earlier rise even has a mundane explanation — speeches simply got
+Part of the earlier rise even has a mundane explanation: speeches simply got
 longer, and longer speeches are easier to classify. The jump after 2023
 survives that correction.
 
@@ -194,7 +194,7 @@ fig.show()
 Parties are not merely choosing different subjects. They increasingly speak
 about **the same subject in different ways**. The timing matches the Twitter
 study, too: the gap between the Finns Party and the left-green parties on
-climate doubled in 2019–23 — exactly when climate began to polarise on
+climate doubled in 2019–23, exactly when climate began to polarise on
 Finnish social media. Part of the within-topic gap is institutional role,
 since governments defend bills and oppositions attack them in the same
 debate.
@@ -280,7 +280,7 @@ Three things stand out.
 [NCP]{.party-chip style="background:#006288"}
 [Finns]{.party-chip style="background:#8a6f00"}
 [CD]{.party-chip style="background:#8E6CC8"}
-speak alike in every term — including 2019–23, when all three sat in
+speak alike in every term, including 2019–23, when all three sat in
 opposition. Their speech is more similar than their election-compass answers
 would predict. Government status alone does not explain it: the five-party
 Marin government spoke *less* cohesively than its three-party opposition.
@@ -296,11 +296,11 @@ its own register.
 **In 2023–27 the two dividing lines coincide for the first time.** The
 right-side trio is now the core of the government, the left-green parties
 lead the opposition, and the pairs across that line have become the most
-separable pairs in parliament — 0.66 on average, against 0.45 two terms ago.
+separable pairs in parliament: 0.66 on average, against 0.45 two terms ago.
 That coincidence is what produces the step in the first figure. The extremes
 put numbers on it: the single closest pair in today's parliament is the
 Christian Democrats and the National Coalition (0.13), while the Finns Party
-against the Left and against the Greens (0.76 each) are the furthest apart —
+against the Left and against the Greens (0.76 each) are the furthest apart,
 once the Swedish People's Party's topic-driven outlier is set aside.
 
 And the lone dot at the edge of every map? The Swedish People's Party is
@@ -310,7 +310,7 @@ positions.
 
 The data also rule something out: the parties pulled apart, but
 **their MPs did not fall into line**. The spread of individual MPs around
-their own party's centre has not narrowed — parliament has not filled with
+their own party's centre has not narrowed: parliament has not filled with
 clones. The distance grew *between* the parties, not by discipline within
 them.
 
@@ -348,7 +348,7 @@ A sample from the current term (Finnish word stems, translations in italics):
 
 Role shows up too: whoever sits in opposition is recognisable by how much
 they talk about *the government* and *the prime minister*. And the model's
-confusions are as telling as its successes — the party it most often mistakes
+confusions are as telling as its successes: the party it most often mistakes
 for another is the Christian Democrats, whose speeches it files under the
 National Coalition or the Finns Party.
 
@@ -361,7 +361,7 @@ parties, from about 130,000 plenary speeches (2015 – September 2026, Parliamen
 Finland open data). Names, party names and formulaic phrases are removed
 before training. The model is always tested on **speakers it never saw during
 training**, every party gets the same amount of training data, and every
-number is reported against a shuffled-labels baseline — the precautions that
+number is reported against a shuffled-labels baseline, the precautions that
 @gentzkow2019 show are necessary before reading classifier accuracy as
 polarisation. Separability of a party pair is 2·AUC − 1 on the model's
 probabilities; our cross-check is the leave-out estimator used by
@@ -384,7 +384,7 @@ up since the 1990s, but gently.
 
 Their series stops in **2018**, one term into our window. Our data pick up the story from there and find the clearest shift
 only after 2023. The two studies use different measures, so their levels
-cannot be laid on the same axis — but read together they suggest that
+cannot be laid on the same axis, but read together they suggest that
 whatever is happening in today's chamber, it is recent, and it was not yet
 visible when the century-long view was last taken.
 
@@ -395,14 +395,14 @@ visible when the century-long view was last taken.
 The transcripts record more than words: gavel knocks, laughter,
 interjections. A few favourites:
 
-**Parliament heckles along bloc lines.** Interjections have doubled — from
-about 28 per hundred speeches in 2015–19 to 56 now — and their direction
+**Parliament heckles along bloc lines.** Interjections have doubled, from
+about 28 per hundred speeches in 2015–19 to 56 now, and their direction
 follows the blocs: left-green MPs heckle the National Coalition and the Finns
 Party, and vice versa.
 
 **The chamber has noticed its own drift.** The stem *polaris-* appears three
 times as often in the current term (22 occurrences per million words) as in
-2015–19 — and the number of different MPs using it has grown at the same
+2015–19, and the number of different MPs using it has grown at the same
 rate.
 
 **Every year has its word.** The fastest-rising stems trace the decade:
@@ -427,14 +427,14 @@ the party they had just left (0.21).
 
 **And the longest night** belongs to the EU recovery package: the sitting of
 12 May 2021 ended at 7.57am the next morning, and 99% of the small-hours
-speeches came from one party — the Finns Party.
+speeches came from one party: the Finns Party.
 
 ## What this does and does not show
 
 Three caveats belong in any honest reading. First, three terms means three
 different governments: with these data, a time trend cannot be fully
 separated from who happens to govern. Second, we measure **language, not
-opinions** — though the speech distances do match election-compass distances
+opinions**, though the speech distances do match election-compass distances
 in the two most recent terms. Third, the smallest parties (the Christian
 Democrats and the Swedish People's Party) have so few MPs that their numbers
 are noisy, and the current term is still incomplete (data to September 2026).

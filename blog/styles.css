@@ -170,8 +170,8 @@ a { color: var(--brand); }
 .party-chip {
   display: inline-block;
   font-family: var(--sans);
-  padding: 0.05rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.05rem 0.6rem;
+  border-radius: 999px;
   font-weight: 700;
   font-size: 0.85em;
   color: #fff;
@@ -186,14 +186,17 @@ a { color: var(--brand); }
 }
 .word-row .party-chip,
 .word-row .w {
+  display: inline-flex;
+  align-items: center;
+  height: 2.1rem;
+  line-height: 1;
   font-size: var(--fs-s);
-  line-height: 1.35;
-  padding: 0.26rem 0.65rem;
-  border-radius: 6px;
+  padding: 0 0.8rem;
+  border-radius: 999px;
 }
 .word-row .party-chip {
   min-width: 4.6rem;
-  text-align: center;
+  justify-content: center;
 }
 .word-row .w {
   font-family: var(--sans);
