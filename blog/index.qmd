@@ -104,7 +104,7 @@ survives that correction.
 ```{python}
 #| echo: false
 #| label: fig-leaveout
-#| fig-cap: "Gentzkow–Shapiro–Taddy leave-out π by year, mean over the 28 party pairs (0.5 = parties indistinguishable from one phrase). Band: 10th–90th percentile of MP subsamples. 2026 covers January–September."
+#| fig-cap: "Gentzkow–Shapiro–Taddy leave-out π by year, mean over the 28 party pairs (0.5 = parties indistinguishable from one phrase). Band: 10th–90th percentile of MP subsamples; dashed verticals mark term boundaries. 2026 covers January–September."
 lo = pd.read_csv("../results/leaveout_party_pairs_year.csv")
 v = lo.groupby("year")[["pi", "pi_random", "sub_lo", "sub_hi"]].mean()
 
@@ -119,8 +119,8 @@ fig.add_trace(go.Scatter(x=v.index, y=v["pi_random"], mode="lines", name="random
                          line={"color": "#8a94a0", "width": 3, "dash": "dot"}))
 for raja in [2018.5, 2022.5]:
     fig.add_vline(x=raja, line={"color": "#bbb", "width": 1, "dash": "dash"})
-fig.add_annotation(x=2024, y=float(v.loc[2024, "pi"]), text="the shift begins in 2023",
-                   showarrow=True, arrowhead=2, ax=-10, ay=-45,
+fig.add_annotation(x=2023, y=float(v.loc[2023, "pi"]), text="the shift begins in 2023",
+                   showarrow=True, arrowhead=2, ax=-20, ay=-45,
                    font={"size": 14, "color": "#1f4e79"})
 fig.update_layout(template="plotly_white", height=420, font={"size": 14},
                   margin={"t": 60, "b": 10},
@@ -159,7 +159,6 @@ NIMET = {"kaikki": "all speeches", "maahanmuutto": "immigration", "ilmasto": "cl
 parit = pd.read_csv("../results/teemat_pairwise.csv")
 parit = parit[(parit["malli"] == "party") & parit["teema"].isin(NIMET)]
 fig = go.Figure()
-paatepisteet = {}
 for teema, nimi in NIMET.items():
     osa = parit[parit["teema"] == teema]
     kaikilla = osa.groupby(["a", "b"])["term"].nunique()
@@ -170,7 +169,6 @@ for teema, nimi in NIMET.items():
         x=KAUDET, y=sarja, mode="lines+markers", name=nimi,
         line={"color": VARIT[nimi], "width": 4.5}, marker={"size": 12},
         hovertemplate=nimi + ", %{x}: %{y:.2f}<extra></extra>"))
-    paatepisteet[nimi] = sarja.iloc[-1]
 
 fig.update_layout(template="plotly_white", height=460,
                   legend={"orientation": "h", "y": -0.18, "x": 0},
@@ -249,9 +247,6 @@ def karttajalki(kausi):
                 "line": {"width": 2.5, "color": "white"}},
         hovertemplate="%{text}<extra></extra>", showlegend=False)
 
-SIIRTYMA = {"frame": {"duration": 700, "redraw": False},
-            "mode": "immediate",
-            "transition": {"duration": 700, "easing": "cubic-in-out"}}
 fig = go.Figure(
     data=[karttajalki(KAUDET[-1])],
     frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
