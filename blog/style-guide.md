@@ -30,8 +30,10 @@ contrast.
 | `--fs-h1` | 2.63 | page title | 700 / 1.12 |
 
 Stat-tile numbers: serif 700, `clamp(1.46rem, 4vw, 2.08rem)`; long numbers one
-step smaller. Plotly (px, set per figure): base 14, takeaway title 20 bold
-serif, annotations 13.
+step smaller. Plotly (px, set per figure): base 14, takeaway title 18 bold
+**sans** in ink (inside figures everything speaks the data voice; Plotly's SVG
+does not load webfonts reliably, so serif titles are not used in charts),
+annotations 13. Value charts show horizontal gridlines only.
 
 ## Colour
 
