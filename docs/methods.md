@@ -90,7 +90,7 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
 | Interjections | parenthetical text dropped | `[...]` and `(...)` dropped | same |
 | Names / parties / procedure | phrases containing them dropped | tokens removed and replaced by a break marker, so no bigram spans them; names removed if capitalised (ambiguous names such as *Rinne*, *Aalto*, *Toimi* only mid-sentence) | same effect; avoids deleting common words |
 | Stop words | NLTK Finnish | NLTK Finnish | same |
-| Stemming | "Porter2" (Snowball; presumably its Finnish algorithm) | Snowball Finnish (PyStemmer) | same; lemmatisation (e.g. Voikko / Turku parser) is a possible robustness check |
+| Stemming | "Porter2" (Snowball; presumably its Finnish algorithm) | Snowball Finnish (PyStemmer) | same; lemmatisation decided against (30 Sep), stated as a limitation |
 | Phrases | bigrams | **unigrams + bigrams** for the classifier (Finnish compounds carry meaning in single words); **bigrams only** for the leave-out estimator | classifier benefits from unigrams; leave-out replicates the paper |
 | Vocabulary thresholds | ≥100 total, ≥10 in one year, ≥10 speaker-years | same → 26,209 phrases (13,468 unigrams, 12,741 bigrams) | same |
 | Unit | speaker-year | **speech** for the classifier; speaker-term and speaker-year for leave-out | the project classifies individual speeches |
@@ -152,7 +152,7 @@ Page numbers: Simola et al. = ACE Discussion Paper 160 (May 2023, the version in
 | bigrams | p. 10 | p. 1311 | unigrams + bigrams (classifier), bigrams (leave-out) | Finnish compounds carry meaning; Simola et al. mention unigrams as an option (p. 10) |
 | thresholds 100 / 10 per year / 10 speaker-years | p. 10 | p. 1312 | same | – |
 | thresholds tightened by 10 % | – | p. 1312 | **not done** | open |
-| stemming splits Finnish lemmas | p. 11 fn 10 | – | **lemmatisation not done** | open |
+| stemming splits Finnish lemmas | p. 11 fn 10 | – | **lemmatisation not done** | decided 30 Sep: report as limitation |
 | finite-sample bias, spurious classifier accuracy | – | pp. 1308, 1310, 1314–1315 | grouped CV, balanced training, leave-out estimator | – |
 | permutation test ("random series") | p. 19 | p. 1318 | same (classifier and leave-out) | – |
 | subsampling intervals | – | p. 1321 | same (80 % of MPs) | – |
@@ -209,6 +209,5 @@ Parties increasingly speak differently *about the same topic*. Part of this can 
 
 - **Done (30 Sep 2026): SDP name-leak fix and rerun.** The party-name regex in notebook 02 now also removes *sosiaalidemokraat-* (transcript spelling from ~2017) and *demareiden/demareita*; the full pipeline 02→04→05→06→10→11→08 was rerun. Measured effect: negligible. Vocabulary 26,209 → 26,203 phrases (exactly the six leaked stems). Classifier polarisation 0.389/0.451/0.559 → 0.391/0.451/0.558 (|Δ| ≤ 0.002, well inside the rep spread of ±0.02–0.04); leave-out π changed by ≤ 3×10⁻⁵; topic-level separability by ≤ 0.008; government vs opposition 2015–19 by −0.013. SDP's distinctive-word lists no longer contain party-name stems. The no-style-words run was byte-identical, as expected: it already excluded these stems, which also confirms the pipeline is deterministic. *vasemmisto\** removal remains a team decision.
 
-- Region (and gender) controls from the MP register, as in Simola et al.
-- Lemmatisation instead of stemming; learning curve over training size.
+- **Decided 30 Sep 2026:** no FinBERT comparison, no region/gender controls and no further sensitivity checks (lemmatisation, learning curve, tighter frequency thresholds). The existing checks (permutation test, leave-out cross-check, no-minister and no-style-word runs, speech-length bins, within-topic separability) are judged sufficient for the course project. State in the report's limitations that Simola et al. control for region and gender and we do not.
 - Read a sample of speeches for the two surprising 2023–27 shifts: Left vs. SDP on immigration (0.13 → 0.63) and Centre vs. NCP on climate (0.25 → 0.65).

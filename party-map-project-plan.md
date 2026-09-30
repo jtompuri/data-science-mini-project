@@ -63,7 +63,7 @@ Toissijaista: sisäinen monimuotoisuus ei ole kaventunut, vaan puolueet ovat erk
 - Kuvat 1–3, blogikirjoitus, tekninen raportti, kolmen minuutin spotlight
 
 **Jos aikaa jää**
-- Suomenkielinen BERT-luokittelija vertailuksi (päätös 5.10.; vain jos lineaarinen malli toimii)
+- ~~Suomenkielinen BERT-luokittelija vertailuksi~~ (päätös 30.9.: jätetään pois; lineaarinen malli riittää tutkimuskysymykseen)
 - "Kuka tämän sanoi?" -demo (Streamlit)
 - Plan B: jos Yle lähettää nimellisen vaalikonetiedoston, edustajatason vertailu "mitä sanoi vaalikoneessa vs. mitä puhuu eduskunnassa"
 
@@ -91,7 +91,7 @@ Tarkemmin muistioissa 02, 04, 05 ja 06 sekä raporttia varten tiedostossa `docs/
 ### Siivous (Simola ym.; muistio 02)
 1. Pois jäävät ruotsinkieliset virkkeet, pääosin ruotsinkieliset puheet, Ahvenanmaan edustaja sekä puolueettomat ja alle viiden hengen ryhmät. Puhemiehen repliikit eivät ole aineistossa puheina.
 2. Pikakirjoittajan merkinnät, edustajien nimet, puolueiden nimet ja muodollisuudet (*arvoisa puhemies*, *edustaja*, kuukaudet) poistetaan tekstistä. Tulos tarkistetaan otoksella.
-3. Täytesanat poistetaan ja sanat vartaloidaan Snowball-stemmerillä, kuten Simolalla ym. Lemmatisointi tehdään herkkyystarkasteluna.
+3. Täytesanat poistetaan ja sanat vartaloidaan Snowball-stemmerillä, kuten Simolalla ym. Lemmatisointia ei tehdä (päätös 30.9.); rajoitus kirjataan raporttiin.
 4. Puolue on eduskuntaryhmä puheen hetkellä. Vuoden 2017 PS:n hajoamisessa syntynyt ryhmä (Uusi vaihtoehto, myöhemmin Siniset) on oma puolueensa. Ryhmää vaihtaneet edustajat merkitään edustajatauluun.
 
 ### Harhojen torjunta
@@ -135,7 +135,7 @@ Viikoittainen palaveri perjantaisin; rajaus- ja karsintapäätökset tehdään s
 |---|---|---|
 | 1 (tehty) | 15.–21.9. | Canvas palautettu; latauksia aloitettu; Yleen otettu yhteyttä |
 | 2 | 22.–28.9. | Puheet ladattu ja siivottu ✓; ensimmäinen luokittelija ✓ (kaikki kaudet); EDA ✓; vaalikoneen puolueprofiilit. **Pe 26.9.: plan B mukaan vai ei** |
-| 3–4 | 29.9.–11.10. | Vakiointi alueella ja sukupuolella; herkkyystarkastelut; vaalikonevertailu; lopulliset kuvat; blogin runko; spotlight-käsikirjoitus. **5.10.: BERT-päätös. 9.10.: tulokset lukitaan** |
+| 3–4 | 29.9.–11.10. | Vaalikonevertailu; lopulliset kuvat; blogin runko; spotlight-käsikirjoitus. **30.9.: päätetty jättää pois BERT, vakioinnit ja herkkyystarkastelut. 9.10.: tulokset lukitaan** |
 | 5 | 12.–16.10. | Spotlight-esitykset; harjoitellaan vähintään 3 kertaa; kuvista staattiset varaversiot; palaute muille ryhmille |
 | 6 | 17.–26.10. | Blogi julkaistu; tekninen raportti; joku muu kuin tekijä ajaa muistiot puhtaalta pöydältä. **Ma 26.10. klo 23.59: palautus** |
 
@@ -145,7 +145,7 @@ Viikoittainen palaveri perjantaisin; rajaus- ja karsintapäätökset tehdään s
 - Muutokset ajassa voivat olla pieniä. → Raportoidaan sellaisinaan.
 - Hallitusasema muokkaa puhetta. → Kontrollitehtävä mittaa sen. (Ensimmäiset tulokset: puolueiden erottuvuuden kasvu näkyy pääosin hallitus–oppositio-rajan yli.)
 - Pienillä puolueilla on vähän aineistoa (KD: 5 edustajaa, RKP: 8–10). → Leveämmät epävarmuusvälit, näytetään rehellisesti.
-- Murre ja alue voivat selittää osan eroista. → Vakiointi vaalipiirillä kansanedustajarekisterin avulla.
+- Murre ja alue voivat selittää osan eroista. → Ei vakioida (päätös 30.9.); mainitaan raportin rajoituksissa, että Simola ym. vakioivat alueen ja sukupuolen.
 - Plan B riippuu Ylestä; mikään muu ei riipu.
 
 ## 11. Etiikka
@@ -157,8 +157,8 @@ Viikoittainen palaveri perjantaisin; rajaus- ja karsintapäätökset tehdään s
 
 ## 12. Avoimet asiat
 
-- [ ] Vakiointi alueella ja sukupuolella kansanedustajarekisterin avulla (Simola ym. vakioivat molemmat)
-- [ ] Herkkyystarkastelut: lemmatisointi vs. vartalointi; oppimiskäyrä opetusaineiston koon mukaan; esiintymisrajojen tiukennus 10 % (Gentzkow ym. s. 1312)
+- [x] Päätös 30.9.: vakiointia alueella ja sukupuolella ei tehdä; ero Simolaan ym. kirjataan raportin rajoituksiin
+- [x] Päätös 30.9.: lemmatisointi-, oppimiskäyrä- ja esiintymisrajatarkasteluja ei tehdä; tehdyt tarkistukset (satunnaistesti, leave-out, ministerit, tyylisanat, pituusluokat, teemat) riittävät kurssityöhön
 - [x] Tyylisanatarkistus (muistio 05 ajo `party_nostyle`, 23.9.): polarisaatio 0,39 → 0,45 → 0,55, lähes sama kuin päätuloksessa
 - [x] Erottuvuus teemoittain ja vertailu Gronowin ja Malkamäen Twitter-tulokseen (muistio 11, 23.9.): kasvu näkyy kaikissa teemoissa
 - [x] SDP:n nimivuoto korjattu ja putki ajettu uudelleen 30.9.: vaikutus mitätön (polarisaatio muuttui enintään 0,002; erot kirjattu methods.md §7). Tiimin päätettävä vielä *vasemmisto*-sanan poisto
