@@ -51,6 +51,13 @@ body {
     rgba(243, 232, 213, 0) 800px);
   background-repeat: no-repeat;
 }
+#title-block-header {
+  margin-top: 3rem;
+  margin-bottom: 2.6rem;
+}
+.quarto-title-meta {
+  margin-top: 2rem;
+}
 h1.title {
   font-family: var(--serif);
   font-size: var(--fs-h1);
