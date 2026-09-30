@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Party Map"
+  description: "How differently do Finnish parties speak in parliament, 2015–2026?"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    fig-width: 8
+    fig-height: 4.5
+
+bibliography: references.bib
+lang: en

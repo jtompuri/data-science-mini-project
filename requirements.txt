@@ -21,3 +21,4 @@ jupyterlab>=4.2
 ipykernel>=6.29
 nbformat>=5.10
 nbconvert>=7.16
+plotly>=5.24          # interactive blog figures
