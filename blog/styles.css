@@ -261,6 +261,7 @@ div.callout.callout-note .callout-body > :last-child,
 div.callout.callout-note .callout-body p:last-child {
   margin-bottom: 0;
 }
+div.callout.callout-note .callout-icon-container,
 div.callout.callout-note .callout-icon {
   display: none;
 }
