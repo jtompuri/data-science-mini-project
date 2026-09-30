@@ -204,11 +204,14 @@ nav[role="doc-toc"] a.active,
   white-space: nowrap;
 }
 .word-row {
+  margin: 0.55rem 0;
+}
+.word-row p {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem;
-  margin: 0.55rem 0;
+  gap: 0.55rem 0.4rem;
+  margin: 0;
 }
 .word-row .party-chip,
 .word-row .w {
