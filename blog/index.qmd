@@ -68,7 +68,7 @@ for sarja, nimi, vari, leveys, viiva in [("real", "party labels", "#1f4e79", 5, 
                  "arrayminus": t["mean"] - t["lo"], "thickness": 2.5}))
 fig.add_annotation(x="2023-2027", y=0.56, text="the 2023 step", showarrow=True,
                    arrowhead=2, ax=-72, ay=-38, standoff=8, xanchor="right",
-                   font={"size": 13, "color": "#1f4e79"})
+                   font={"size": 14, "color": "#1f4e79"})
 fig.update_layout(margin={"t": 60, "b": 10}, yaxis_title="separability",
                   xaxis_title=None, template="plotly_white", height=440,
                   font={"size": 14},
@@ -118,7 +118,7 @@ for raja in [2018.5, 2022.5]:
     fig.add_vline(x=raja, line={"color": "#bbb", "width": 1, "dash": "dash"})
 fig.add_annotation(x=2024, y=float(v.loc[2024, "pi"]), text="the shift begins in 2023",
                    showarrow=True, arrowhead=2, ax=-10, ay=-45,
-                   font={"size": 13, "color": "#1f4e79"})
+                   font={"size": 14, "color": "#1f4e79"})
 fig.update_layout(template="plotly_white", height=420, font={"size": 14},
                   margin={"t": 60, "b": 10},
                   title={"text": "<b>Eight years of wobble, then a shift</b>",
@@ -250,7 +250,7 @@ def karttajalki(kausi):
     return go.Scatter(
         x=xy[:, 0], y=xy[:, 1], mode="markers+text",
         text=[config.PARTY_SHORT_EN[p] for p in config.MAIN_PARTIES],
-        textposition=nimiopaikat(xy), textfont={"size": 14, "color": "#222"},
+        textposition=nimiopaikat(xy), textfont={"size": 14, "color": "#222c36"},
         marker={"size": 22, "color": [config.PARTY_COLORS[p] for p in config.MAIN_PARTIES],
                 "line": {"width": 2.5, "color": "white"}},
         hovertemplate="%{text}<extra></extra>", showlegend=False)
