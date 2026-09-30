@@ -3,7 +3,7 @@ title: "How far apart are Finnish parties?"
 subtitle: "What 130,000 parliamentary speeches reveal about polarisation, 2015–2026"
 author:
   - Janne Tompuri
-  - Maarit Vilén
+  - Maarit Vilen
   - Karri Lumivirta
 date: last-modified
 ---
