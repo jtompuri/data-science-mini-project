@@ -178,17 +178,26 @@ a { color: var(--brand); }
   white-space: nowrap;
 }
 .word-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
   margin: 0.55rem 0;
-  line-height: 2.1;
 }
-.word-row .party-chip { margin-right: 0.4rem; }
+.word-row .party-chip,
+.word-row .w {
+  font-size: var(--fs-s);
+  line-height: 1.35;
+  padding: 0.26rem 0.65rem;
+  border-radius: 6px;
+}
+.word-row .party-chip {
+  min-width: 4.6rem;
+  text-align: center;
+}
 .word-row .w {
   font-family: var(--sans);
   background: var(--surface-2);
-  border-radius: 6px;
-  padding: 0.12rem 0.55rem;
-  margin-right: 0.35rem;
-  font-size: var(--fs-s);
   white-space: nowrap;
 }
 .word-row .w i { color: var(--muted); font-size: 0.88em; }
