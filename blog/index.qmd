@@ -35,8 +35,8 @@ parliamentary terms.
 [separability of party pairs]{.lbl}
 :::
 ::: {.stat-tile}
-[× 2]{.num}
-[interjections per speech since 2015]{.lbl}
+[0.13 / 0.76]{.num .pitka}
+[closest and furthest party pair today]{.lbl}
 :::
 :::
 
@@ -256,9 +256,8 @@ fig.update_layout(
     margin={"t": 55, "b": 10, "l": 10, "r": 10}, font={"size": 14},
     title={"text": "<b>A decade rearranges itself</b>",
            "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
-    xaxis={"visible": False, "range": [-0.50, 0.37], "constrain": "domain"},
-    yaxis={"visible": False, "scaleanchor": "x", "range": [-0.50, 0.37],
-           "constrain": "domain"})
+    xaxis={"visible": False, "scaleanchor": "y", "scaleratio": 1},
+    yaxis={"visible": False, "range": [-0.50, 0.37]})
 fig.update_layout(paper_bgcolor="rgba(0,0,0,0)")
 fig.show()
 ```
