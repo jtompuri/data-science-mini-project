@@ -261,7 +261,11 @@ fig = go.Figure(
     data=[karttajalki(KAUDET[-1])],
     frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
 fig.update_layout(
-    template="plotly_white", height=440, plot_bgcolor="#f2e9db",
+    template="plotly_white", height=440,
+    plot_bgcolor="rgba(236, 225, 205, 0.45)",
+    shapes=[{"type": "rect", "xref": "paper", "yref": "paper",
+             "x0": 0, "y0": 0, "x1": 1, "y1": 1, "layer": "below",
+             "line": {"color": "#cfc2a8", "width": 1}}],
     margin={"t": 55, "b": 10, "l": 10, "r": 10}, font={"size": 14},
     title={"text": "<b>A decade rearranges itself</b>",
            "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
