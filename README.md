@@ -36,7 +36,7 @@ src/
   stopwords_fi_style.txt      extra style words for the robustness run party_nostyle (notebook 05)
   data_cleanup.py             column check of the raw export (see Source data)
 results/                      model outputs (csv/json) and summary_tables.md
-reports/figures/              figures (eda_*, tulokset_* in Finnish; res_* in English)
+reports/figures/              figures (Finnish: eda_*, tulokset_*, sanat_*, teemat_*, vaalikone_*; English: res_*)
 docs/methods.md               paper summaries, design decisions, limitations (English)
 scripts/setup_venv.sh         creates the virtual environment
 Canvas/                       project canvas (course submission)
@@ -73,7 +73,7 @@ jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeou
 | 01, 02, 03 | ~2 min | |
 | 04 | ~1 min | needs ~5 GB RAM |
 | 05 | ~15–55 min | five runs; also writes `Data/processed/party_oof.parquet` and `party_nostyle_oof.parquet` for notebook 11; lower `TOISTOT` / `SATUNNAISET` for a quick test |
-| 06 | ~15 min | |
+| 06 | ~1–5 min | leave-out estimates, 4 permutations and 30 subsamples per pair |
 | 07, 09 | seconds | read `results/` (09 also the election-compass CSVs) |
 | 10 | ~2 min | fits 10 models per term to get the word weights |
 | 11 | ~1 min | needs the prediction files from 05 and the raw text from 01; also writes the speech-length check used by 07 |
@@ -99,6 +99,10 @@ The plenary speeches were retrieved from the Parliament of Finland search servic
 ## Changes to raw data
 
 - `Data/avoin_data_eduskuntavaalit_2015.csv`: one Latin-1 byte in an otherwise UTF-8 file was replaced with its UTF-8 form (byte 9,223,331, `0xE4` → `0xC3 0xA4`, the *ä* in "1.kesä" in a free-text field), 23 Sep 2026.
+
+## AI use
+
+AI (Anthropic's Claude) was used for research design, for producing code and figures, and for producing and proofreading text. The team members have reviewed the AI-produced text, figures and code. Details: `docs/methods.md` §8.
 
 ## Data licence
 
