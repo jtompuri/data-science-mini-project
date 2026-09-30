@@ -280,7 +280,11 @@ own register.
 right-side trio is now the core of the government, the left-green parties
 lead the opposition, and the pairs across that line have become the most
 separable pairs in parliament — 0.66 on average, against 0.45 two terms ago.
-That coincidence is what produces the step in the first figure.
+That coincidence is what produces the step in the first figure. The extremes
+put numbers on it: the single closest pair in today's parliament is the
+Christian Democrats and the National Coalition (0.13), while the Finns Party
+against the Left and against the Greens (0.76 each) are the furthest apart —
+once the Swedish People's Party's topic-driven outlier is set aside.
 
 And the lone dot at the edge of every map? The Swedish People's Party is
 separated by its subjects — education, the Swedish language, its regions —
