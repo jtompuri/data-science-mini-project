@@ -110,10 +110,7 @@ a { color: var(--brand); }
 .callout, .quarto-title-meta {
   font-family: var(--sans);
 }
-.callout-note {
-  font-size: var(--fs-m);
-  line-height: 1.55;
-}
+
 
 /* --- Numerolaatat --- */
 .stat-grid {
@@ -196,10 +193,6 @@ a { color: var(--brand); }
 }
 .word-row .w i { color: var(--muted); font-size: 0.88em; }
 
-.callout-note {
-  background-color: rgba(255, 255, 255, 0.55);
-}
-
 /* --- Kausinapit (HTML; Plotlyn SVG-napit eivät tottele sivun tyylejä) --- */
 .term-buttons {
   display: flex;
@@ -228,4 +221,26 @@ a { color: var(--brand); }
 .term-buttons button:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
+}
+
+/* --- Menetelmälaatikko: Quarton sinisen oletuksen tilalle talon tyyli --- */
+div.callout.callout-note {
+  border: none;
+  border-left: 5px solid var(--brand);
+  border-radius: 0 10px 10px 0;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: var(--fs-m);
+  line-height: 1.55;
+}
+div.callout.callout-note .callout-header {
+  background: transparent;
+  color: var(--brand-deep);
+  font-family: var(--sans);
+  font-weight: 600;
+}
+div.callout.callout-note .callout-icon {
+  display: none;
+}
+div.callout.callout-note .callout-title-container {
+  margin-left: 0;
 }
