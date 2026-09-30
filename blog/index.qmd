@@ -3,6 +3,8 @@ title: "How far apart are Finnish parties?"
 subtitle: "What 130,000 parliamentary speeches reveal about polarisation, 2015–2026"
 author: "Janne Tompuri · Maarit Vilen · Karri Lumivirta"
 date: last-modified
+language:
+  title-block-author-single: "Authors"
 ---
 
 ::: {.lead}
@@ -55,13 +57,13 @@ import plotly.graph_objects as go
 
 s = pd.read_csv("../results/party_summary.csv")
 fig = go.Figure()
-for sarja, nimi, vari, leveys in [("real", "party labels", "#1f4e79", 5),
-                                  ("random", "random labels", "#8a94a0", 3)]:
+for sarja, nimi, vari, leveys, viiva in [("real", "party labels", "#1f4e79", 5, "solid"),
+                                         ("random", "random labels", "#8a94a0", 3, "dot")]:
     t = s[s["series"] == sarja].groupby("term")["polarisation"].agg(
         mean="mean", lo=lambda x: x.quantile(0.1), hi=lambda x: x.quantile(0.9))
     fig.add_trace(go.Scatter(
         x=t.index, y=t["mean"], mode="lines+markers", name=nimi,
-        line={"color": vari, "width": leveys}, marker={"size": 13},
+        line={"color": vari, "width": leveys, "dash": viiva}, marker={"size": 13},
         error_y={"type": "data", "array": t["hi"] - t["mean"],
                  "arrayminus": t["mean"] - t["lo"], "thickness": 2.5}))
 fig.add_annotation(x="2023-2027", y=0.56, text="the 2023 step", showarrow=True,

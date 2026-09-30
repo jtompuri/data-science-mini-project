@@ -9,7 +9,7 @@
   --fs-m: 1.02rem;
   --fs-base: 1.15rem;
   --fs-lede: 1.29rem;
-  --fs-sub: 1.46rem;
+  --fs-sub: 1.32rem;
   --fs-h3: 1.64rem;
   --fs-h2: 1.85rem;
   --fs-h1: 2.63rem;
@@ -65,6 +65,7 @@ p.subtitle {
   font-weight: 600;
   color: var(--brand-deep);
   line-height: 1.35;
+  text-wrap: balance;
   margin-top: 0.5rem;
 }
 h2 {
@@ -101,6 +102,16 @@ h3 {
   font-weight: 700;
 }
 a { color: var(--brand); }
+nav[role="doc-toc"] a,
+#TOC a {
+  color: var(--ink);
+}
+nav[role="doc-toc"] a.active,
+#TOC a.active {
+  color: var(--brand);
+  border-left-color: var(--brand);
+}
+#toc-title { color: var(--ink-strong); }
 .figure-caption, .quarto-float-caption {
   font-family: var(--sans);
   font-size: var(--fs-xs);
