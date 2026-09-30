@@ -258,9 +258,6 @@ fig = go.Figure(
 fig.update_layout(
     template="plotly_white", height=440,
     plot_bgcolor="rgba(0,0,0,0)",
-    shapes=[{"type": "rect", "xref": "x domain", "yref": "y domain",
-             "x0": 0, "y0": 0, "x1": 1, "y1": 1, "layer": "below",
-             "line": {"color": "#cfc2a8", "width": 1}}],
     margin={"t": 55, "b": 10, "l": 10, "r": 10}, font={"size": 14},
     title={"text": "<b>A decade rearranges itself</b>",
            "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
