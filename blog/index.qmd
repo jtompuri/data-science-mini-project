@@ -40,7 +40,7 @@ parliamentary terms.
 :::
 :::
 
-## Parties have drifted apart — and the step came in 2023
+## The step came in 2023
 
 Our headline measure is **separability**: how reliably two parties' speeches
 can be told apart (0 = indistinguishable, 1 = always distinguishable).

@@ -80,6 +80,7 @@ h2 {
   font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.2;
+  text-wrap: balance;
   color: var(--ink-strong);
   margin-top: 3rem;
   border-bottom: none !important;
