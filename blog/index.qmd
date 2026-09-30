@@ -6,9 +6,9 @@ date: last-modified
 ---
 
 ::: {.lead}
-At 7.57 on a May morning in 2021, the Speaker's gavel finally fell on the
+At 7.57am on a May morning in 2021, the Speaker's gavel finally fell on the
 longest sitting of the decade. Parliament had argued about the EU recovery
-package all night — and 99 % of the small-hours speeches came from a single
+package all night — and 99% of the small-hours speeches came from a single
 party. Interjections shouted across the chamber have doubled since 2015. The
 word *polarisaatio* is uttered three times as often as a decade ago.
 
@@ -21,7 +21,7 @@ parliamentary terms.
 
 ::: {.stat-grid}
 ::: {.stat-tile}
-[130 000]{.num}
+[130,000]{.num}
 [plenary speeches, 2015–2026]{.lbl}
 :::
 ::: {.stat-tile}
@@ -87,7 +87,7 @@ the leave-out estimator that @gentzkow2019 built for the US Congress and
 party pairs almost identically.
 
 That second yardstick can be computed year by year, and it sharpens the
-story: **flat from 2015 through 2022, rising from 2023 onwards.** What looks
+story: **flat from 2015 to 2022, rising from 2023 onwards.** What looks
 like a decade-long trend is closer to a step change during the current term.
 Part of the earlier rise even has a mundane explanation — speeches simply got
 longer, and longer speeches are easier to classify. The jump after 2023
@@ -321,7 +321,7 @@ National Coalition or the Finns Party.
 
 We trained a classifier (TF-IDF features and logistic regression) to predict
 the speaker's party from a single speech, separately for each term and eight
-parties, from about 130,000 plenary speeches (2015 – Sep 2026, Parliament of
+parties, from about 130,000 plenary speeches (2015 – September 2026, Parliament of
 Finland open data). Names, party names and formulaic phrases are removed
 before training. The model is always tested on **speakers it never saw during
 training**, every party gets the same amount of training data, and every
@@ -391,7 +391,7 @@ sat as close to their coalition partner, the National Coalition (0.19), as to
 the party they had just left (0.21).
 
 **And the longest night** belongs to the EU recovery package: the sitting of
-12 May 2021 ended at 7.57 the next morning, and 99 % of the small-hours
+12 May 2021 ended at 7.57am the next morning, and 99% of the small-hours
 speeches came from one party — the Finns Party.
 
 ## What this does and does not show
