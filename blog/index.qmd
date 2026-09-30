@@ -107,7 +107,8 @@ fig.update_layout(template="plotly_white", showlegend=False, height=420,
                   margin={"t": 10, "b": 10, "l": 10, "r": 90},
                   yaxis={"title": "separability", "rangemode": "tozero"},
                   xaxis={"title": None})
-fig.show()```
+fig.show()
+```
 
 Parties are not only choosing different subjects; they increasingly speak
 about **the same subject in different ways**. The directions match the Twitter
@@ -166,7 +167,8 @@ fig.update_layout(
                                "args": [{"visible": [j == i for j in range(3)]}]}
                               for i, kausi in enumerate(KAUDET)],
                   "active": 2}])
-fig.show()```
+fig.show()
+```
 
 Three things stand out.
 
