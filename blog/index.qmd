@@ -155,6 +155,7 @@ NIMET = {"kaikki": "all speeches", "maahanmuutto": "immigration", "ilmasto": "cl
 parit = pd.read_csv("../results/teemat_pairwise.csv")
 parit = parit[(parit["malli"] == "party") & parit["teema"].isin(NIMET)]
 fig = go.Figure()
+paatepisteet = {}
 for teema, nimi in NIMET.items():
     osa = parit[parit["teema"] == teema]
     kaikilla = osa.groupby(["a", "b"])["term"].nunique()
@@ -165,9 +166,19 @@ for teema, nimi in NIMET.items():
         x=KAUDET, y=sarja, mode="lines+markers", name=nimi,
         line={"color": VARIT[nimi], "width": 4.5}, marker={"size": 12},
         hovertemplate=nimi + ", %{x}: %{y:.2f}<extra></extra>"))
-    fig.add_annotation(x=KAUDET[-1], y=sarja.iloc[-1], text=nimi, showarrow=False,
-                       xanchor="left", xshift=10,
+    paatepisteet[nimi] = sarja.iloc[-1]
+
+# nimiöt arvojärjestyksessä; pakotetaan vähimmäisväli, etteivät ne mene päällekkäin
+VALI = 0.028
+paikat = sorted(paatepisteet.items(), key=lambda p: -p[1])
+y_edellinen = None
+for nimi, y in paikat:
+    if y_edellinen is not None and y > y_edellinen - VALI:
+        y = y_edellinen - VALI
+    fig.add_annotation(x=KAUDET[-1], y=y, text=nimi, showarrow=False,
+                       xanchor="left", xshift=10, yanchor="middle",
                        font={"size": 12.5, "color": VARIT[nimi]})
+    y_edellinen = y
 fig.update_layout(template="plotly_white", showlegend=False, height=460,
                   margin={"t": 55, "b": 10, "l": 10, "r": 105},
                   font={"size": 14},
