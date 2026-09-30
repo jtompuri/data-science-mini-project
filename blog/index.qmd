@@ -206,6 +206,12 @@ Which parties actually sound alike? The map below places parties so that the
 ones our model confuses most often sit closest together. Press the buttons
 and watch a decade of Finnish politics rearrange itself.
 
+::: {.term-buttons data-target="fig-map"}
+<button data-frame="2015-2019">2015–19</button>
+<button data-frame="2019-2023">2019–23</button>
+<button data-frame="2023-2027" class="active">2023–27</button>
+:::
+
 ```{python}
 #| echo: false
 #| label: fig-map
@@ -256,18 +262,11 @@ fig = go.Figure(
     frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
 fig.update_layout(
     template="plotly_white", height=440, plot_bgcolor="#f2e9db",
-    margin={"t": 85, "b": 10, "l": 10, "r": 10}, font={"size": 14},
+    margin={"t": 55, "b": 10, "l": 10, "r": 10}, font={"size": 14},
     title={"text": "<b>A decade rearranges itself</b>",
-           "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0, "y": 0.97},
+           "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
     xaxis={"visible": False, "range": [-0.52, 0.52]},
-    yaxis={"visible": False, "scaleanchor": "x", "range": [-0.49, 0.46]},
-    updatemenus=[{"type": "buttons", "direction": "right", "x": 0, "xanchor": "left",
-                  "y": 1.10, "yanchor": "top",
-                  "bgcolor": "rgba(250, 246, 239, 0.6)", "bordercolor": "#1f4e79",
-                  "borderwidth": 1, "font": {"color": "#16283b", "size": 13},
-                  "buttons": [{"label": kausi, "method": "animate",
-                               "args": [[kausi], SIIRTYMA]} for kausi in KAUDET],
-                  "active": 2}])
+    yaxis={"visible": False, "scaleanchor": "x", "range": [-0.49, 0.46]})
 fig.update_layout(paper_bgcolor="rgba(0,0,0,0)")
 fig.show()
 ```
@@ -450,6 +449,26 @@ now coincides with the government–opposition divide.
 (CC BY 4.0), analysed at party level only. AI (Anthropic's Claude) was used for
 research design, code, figures and text drafting; the team reviewed all output.
 Code and methods: [github.com/jtompuri/data-science-mini-project](https://github.com/jtompuri/data-science-mini-project).*
+
+<script>
+window.addEventListener("load", function () {
+  document.querySelectorAll(".term-buttons").forEach(function (rivi) {
+    var kohde = document.querySelector("#" + rivi.dataset.target + " .js-plotly-plot");
+    if (!kohde || typeof Plotly === "undefined") return;
+    rivi.querySelectorAll("button").forEach(function (nappi) {
+      nappi.addEventListener("click", function () {
+        Plotly.animate(kohde, [nappi.dataset.frame], {
+          mode: "immediate",
+          frame: { duration: 700, redraw: false },
+          transition: { duration: 700, easing: "cubic-in-out" }
+        });
+        rivi.querySelectorAll("button").forEach(function (b) { b.classList.remove("active"); });
+        nappi.classList.add("active");
+      });
+    });
+  });
+});
+</script>
 
 ## References
 

@@ -199,3 +199,32 @@ a { color: var(--brand); }
 .callout-note {
   background-color: rgba(255, 255, 255, 0.55);
 }
+
+/* --- Kausinapit (HTML; Plotlyn SVG-napit eivät tottele sivun tyylejä) --- */
+.term-buttons {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0.2rem;
+}
+.term-buttons button {
+  font-family: var(--sans);
+  font-size: var(--fs-s);
+  padding: 0.32rem 0.85rem;
+  border: 1px solid var(--brand);
+  border-radius: 6px;
+  background: rgba(250, 246, 239, 0.6);
+  color: var(--ink-strong);
+  cursor: pointer;
+}
+.term-buttons button:hover {
+  background: var(--surface-2);
+}
+.term-buttons button.active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.term-buttons button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}

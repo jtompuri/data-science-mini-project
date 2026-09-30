@@ -94,9 +94,9 @@ should see.
   page reads without the charts; captions carry method and source.
 - Identity is never colour-alone: map points and chips carry text labels,
   chart series are directly labelled.
-- Known limitation: Plotly's term buttons and tooltips are not reachable by
-  keyboard (an upstream Plotly issue). The default view shows the current
-  term and the other terms' story is told in the prose, so no information is
-  interaction-locked.
+- The map's term buttons are real HTML buttons (Plotly's SVG buttons ignore
+  page CSS and hardcode a pale-blue active state), so they are keyboard
+  operable with a visible focus ring. Known limitation: Plotly tooltips
+  remain hover-only; every number shown in a figure is also in the prose.
 - The map animation runs only when the reader presses a button
   (user-initiated motion; nothing autoplays).
