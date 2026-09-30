@@ -1,0 +1,466 @@
+---
+title: "How far apart are Finnish parties?"
+subtitle: "What 130,000 parliamentary speeches reveal about polarisation, 2015–2026"
+author: "Janne Tompuri · Maarit Vilen · Karri Lumivirta"
+date: last-modified
+language:
+  title-block-author-single: "Authors"
+---
+
+::: {.lead}
+At 7.57am on a May morning in 2021, the Speaker's gavel finally fell on the
+longest sitting of the decade. Parliament had argued about the EU recovery
+package all night, and 99% of the small-hours speeches came from a single
+party. Interjections shouted across the chamber have doubled since 2015. The
+word *polarisaatio* is uttered three times as often as a decade ago.
+
+It certainly *feels* like Finnish politics is pulling apart. But feelings are
+cheap. So we measured it: we taught a computer to guess which party a speaker
+belongs to from a single plenary speech — no names, no party labels, just the
+words — and watched how much easier that guess has become over three
+parliamentary terms.
+:::
+
+::: {.stat-grid}
+::: {.stat-tile}
+[130,000]{.num}
+[plenary speeches, 2015–2026]{.lbl}
+:::
+::: {.stat-tile}
+[1 in 3]{.num}
+[correct party guesses today, up from 1 in 4]{.lbl}
+:::
+::: {.stat-tile}
+[0.39 → 0.56]{.num .pitka}
+[separability of party pairs]{.lbl}
+:::
+::: {.stat-tile}
+[0.13 / 0.76]{.num .pitka}
+[closest and furthest party pair today]{.lbl}
+:::
+:::
+
+## Parties have drifted apart — and the step came in 2023
+
+Our headline measure is **separability**: how reliably two parties' speeches
+can be told apart (0 = indistinguishable, 1 = always distinguishable).
+Averaged over all 28 party pairs, it climbed from 0.39 to 0.45 to 0.56 across
+the three terms. That is not a gentle drift. Most of the move happens in one
+step.
+
+```{python}
+#| echo: false
+#| label: fig-polarisation
+#| fig-cap: "Mean separability over the 28 party pairs (0 = parties indistinguishable, 1 = always distinguishable). Bands: 10th–90th percentile over 8 repetitions. Random labels show the method finds no difference where none exists."
+import pandas as pd
+import plotly.graph_objects as go
+
+s = pd.read_csv("../results/party_summary.csv")
+fig = go.Figure()
+for sarja, nimi, vari, leveys, viiva in [("real", "party labels", "#1f4e79", 5, "solid"),
+                                         ("random", "random labels", "#8a94a0", 3, "dot")]:
+    t = s[s["series"] == sarja].groupby("term")["polarisation"].agg(
+        mean="mean", lo=lambda x: x.quantile(0.1), hi=lambda x: x.quantile(0.9))
+    fig.add_trace(go.Scatter(
+        x=t.index, y=t["mean"], mode="lines+markers", name=nimi,
+        line={"color": vari, "width": leveys, "dash": viiva}, marker={"size": 13},
+        error_y={"type": "data", "array": t["hi"] - t["mean"],
+                 "arrayminus": t["mean"] - t["lo"], "thickness": 2.5}))
+fig.add_annotation(x="2023-2027", y=0.56, text="the 2023 step", showarrow=True,
+                   arrowhead=2, ax=-72, ay=-38, standoff=8, xanchor="right",
+                   font={"size": 14, "color": "#1f4e79"})
+fig.update_layout(margin={"t": 60, "b": 10}, yaxis_title="separability",
+                  xaxis_title=None, template="plotly_white", height=440,
+                  font={"size": 14},
+                  title={"text": "<b>One step, not a slow drift</b>",
+                         "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
+                  legend={"orientation": "h", "y": -0.18, "x": 0},
+                  xaxis={"tickangle": 0,
+                         "tickvals": ["2015-2019", "2019-2023", "2023-2027"],
+                         "ticktext": ["2015–19", "2019–23", "2023–27"]})
+fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+fig.update_xaxes(showgrid=False, zerolinecolor="#e8dfcd")
+fig.update_yaxes(gridcolor="#e8dfcd", zerolinecolor="#e8dfcd")
+fig.show()
+```
+
+Why believe a computer's guessing game? Two checks. Shuffle the party labels
+and repeat everything, and the measure collapses to zero: the method invents
+nothing. And a completely different yardstick from the economics literature,
+the leave-out estimator that @gentzkow2019 built for the US Congress and
+@simola2023 applied to a century of Finnish parliamentary speech, ranks the
+party pairs almost identically.
+
+That second yardstick can be computed year by year, and it sharpens the
+story. From 2015 to 2022 the line wobbles without a sustained trend: it
+drifts up in 2018–21, then falls back. **From 2023 it climbs above every
+earlier year and stays there.** What looks like a decade-long trend is
+closer to a step change during the current term, with one caveat: the
+partial year 2026 dips back towards the old range.
+Part of the earlier rise even has a mundane explanation: speeches simply got
+longer, and longer speeches are easier to classify. The jump after 2023
+survives that correction.
+
+```{python}
+#| echo: false
+#| label: fig-leaveout
+#| fig-cap: "Gentzkow–Shapiro–Taddy leave-out π by year, mean over the 28 party pairs (0.5 = parties indistinguishable from one phrase). Band: 10th–90th percentile of MP subsamples; dashed verticals mark term boundaries. 2026 covers January–September."
+lo = pd.read_csv("../results/leaveout_party_pairs_year.csv")
+v = lo.groupby("year")[["pi", "pi_random", "sub_lo", "sub_hi"]].mean()
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=list(v.index) + list(v.index[::-1]),
+                         y=list(v["sub_hi"]) + list(v["sub_lo"][::-1]),
+                         fill="toself", fillcolor="rgba(31,78,121,0.15)",
+                         line={"width": 0}, hoverinfo="skip", showlegend=False))
+fig.add_trace(go.Scatter(x=v.index, y=v["pi"], mode="lines+markers", name="party pairs",
+                         line={"color": "#1f4e79", "width": 5}, marker={"size": 12}))
+fig.add_trace(go.Scatter(x=v.index, y=v["pi_random"], mode="lines", name="random labels",
+                         line={"color": "#8a94a0", "width": 3, "dash": "dot"}))
+for raja in [2018.5, 2022.5]:
+    fig.add_vline(x=raja, line={"color": "#bbb", "width": 1, "dash": "dash"})
+fig.add_annotation(x=2023, y=float(v.loc[2023, "pi"]), text="the shift begins in 2023",
+                   showarrow=True, arrowhead=2, ax=-20, ay=-45,
+                   font={"size": 14, "color": "#1f4e79"})
+fig.update_layout(template="plotly_white", height=420, font={"size": 14},
+                  margin={"t": 60, "b": 10},
+                  title={"text": "<b>Eight years of wobble, then a shift</b>",
+                         "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
+                  yaxis={"title": "leave-out π"}, xaxis={"title": None, "dtick": 2},
+                  legend={"orientation": "h", "y": -0.18, "x": 0})
+fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+fig.update_xaxes(showgrid=False, zerolinecolor="#e8dfcd")
+fig.update_yaxes(gridcolor="#e8dfcd", zerolinecolor="#e8dfcd")
+fig.show()
+```
+
+## It is not just that parties talk about different things
+
+An obvious objection: perhaps parties have not changed how they speak, only
+what they speak about. The Finns Party talks about immigration, the Greens
+about climate, and a word counter tells them apart without any polarisation
+being involved.
+
+So we repeated the measurement *inside* topics, using the topic keywords of a
+recent study of Finnish social media [@gronow2024]. The objection fails.
+Within every topic — climate, immigration, security, even the tax-heavy
+inequality debate — parties have become easier to tell apart.
+
+```{python}
+#| echo: false
+#| label: fig-topics
+#| fig-cap: "Separability within the same topic (mean over the party pairs measurable in all three terms; topic keywords from @gronow2024). Inequality is mostly tax debate in parliament; COVID-19 spans only one term and is omitted."
+KAUDET = ["2015-2019", "2019-2023", "2023-2027"]
+VARIT = {"all speeches": "#2a78d6", "immigration": "#eb6834", "climate": "#1baf7a",
+         "security": "#eda100", "inequality": "#e87ba4"}
+NIMET = {"kaikki": "all speeches", "maahanmuutto": "immigration", "ilmasto": "climate",
+         "turvallisuus": "security", "eriarvoisuus": "inequality"}
+
+parit = pd.read_csv("../results/teemat_pairwise.csv")
+parit = parit[(parit["malli"] == "party") & parit["teema"].isin(NIMET)]
+fig = go.Figure()
+for teema, nimi in NIMET.items():
+    osa = parit[parit["teema"] == teema]
+    kaikilla = osa.groupby(["a", "b"])["term"].nunique()
+    parilista = kaikilla[kaikilla == 3].index
+    osa = osa.set_index(["a", "b"]).loc[parilista].reset_index()
+    sarja = osa.groupby("term")["d"].mean().reindex(KAUDET)
+    fig.add_trace(go.Scatter(
+        x=KAUDET, y=sarja, mode="lines+markers", name=nimi,
+        line={"color": VARIT[nimi], "width": 4.5}, marker={"size": 12},
+        hovertemplate=nimi + ", %{x}: %{y:.2f}<extra></extra>"))
+
+fig.update_layout(template="plotly_white", height=460,
+                  legend={"orientation": "h", "y": -0.18, "x": 0},
+                  margin={"t": 55, "b": 10, "l": 10, "r": 10},
+                  font={"size": 14},
+                  title={"text": "<b>Same topic, widening gap</b>",
+                         "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
+                  yaxis={"title": "separability"},
+                  xaxis={"title": None, "tickangle": 0, "tickvals": KAUDET,
+                         "ticktext": ["2015–19", "2019–23", "2023–27"]})
+fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
+fig.update_xaxes(showgrid=False, zerolinecolor="#e8dfcd")
+fig.update_yaxes(gridcolor="#e8dfcd", zerolinecolor="#e8dfcd")
+fig.show()
+```
+
+Parties are not merely choosing different subjects. They increasingly speak
+about **the same subject in different ways**. The timing matches the Twitter
+study, too: the gap between the Finns Party and the left-green parties on
+climate doubled in 2019–23, exactly when climate began to polarise on
+Finnish social media. Part of the within-topic gap is institutional role,
+since governments defend bills and oppositions attack them in the same
+debate.
+
+## Two blocs
+
+Which parties actually sound alike? The map below places parties so that the
+ones our model confuses most often sit closest together. The buttons
+animate the changes from term to term.
+
+::: {.term-buttons data-target="fig-map"}
+<button data-frame="2015-2019">2015–19</button>
+<button data-frame="2019-2023">2019–23</button>
+<button data-frame="2023-2027" class="active">2023–27</button>
+:::
+
+```{python}
+#| echo: false
+#| label: fig-map
+#| fig-cap: "Party map: parties the model confuses most often sit closest together (classical multidimensional scaling on the separability matrix). Colours are the parties' official colours; the buttons animate the moves between terms. Axes have no fixed meaning. Abbreviations (Finnish in brackets): NCP = National Coalition (KOK), Finns = Finns Party (PS), CD = Christian Democrats (KD), SPP = Swedish People's Party (RKP), Left = Left Alliance (VAS), Greens = Green League (VIHR), Centre = Centre Party (KESK), SDP = Social Democrats."
+import sys
+sys.path.insert(0, "../src")
+import config
+from reporting import parimatriisi, klassinen_mds, kierra_kohti
+
+parit = pd.read_csv("../results/party_pairwise.csv")
+parit = parit[parit["series"] == "real"]
+
+kartat, edellinen = {}, None
+for kausi in KAUDET:
+    xy = klassinen_mds(parimatriisi(parit[parit["term"] == kausi], "d").values)
+    if edellinen is not None:
+        xy = kierra_kohti(xy, edellinen)
+    kartat[kausi] = xy
+    edellinen = xy
+
+def nimiopaikat(xy):
+    """'top center' kaikille, paitsi törmäävän parin alempi piste saa nimiön alleen."""
+    paikat = ["top center"] * len(xy)
+    for i in range(len(xy)):
+        for j in range(len(xy)):
+            if i == j:
+                continue
+            if abs(xy[i, 0] - xy[j, 0]) < 0.11 and 0 <= xy[j, 1] - xy[i, 1] < 0.07:
+                paikat[i] = "bottom center"
+    return paikat
+
+
+def karttajalki(kausi):
+    xy = kartat[kausi]
+    return go.Scatter(
+        x=xy[:, 0], y=xy[:, 1], mode="markers+text",
+        text=[config.PARTY_SHORT_EN[p] for p in config.MAIN_PARTIES],
+        textposition=nimiopaikat(xy), textfont={"size": 14, "color": "#222c36"},
+        marker={"size": 22, "color": [config.PARTY_COLORS[p] for p in config.MAIN_PARTIES],
+                "line": {"width": 2.5, "color": "white"}},
+        hovertemplate="%{text}<extra></extra>", showlegend=False)
+
+fig = go.Figure(
+    data=[karttajalki(KAUDET[-1])],
+    frames=[go.Frame(name=kausi, data=[karttajalki(kausi)]) for kausi in KAUDET])
+fig.update_layout(
+    template="plotly_white", height=440,
+    plot_bgcolor="rgba(0,0,0,0)",
+    margin={"t": 55, "b": 10, "l": 10, "r": 10}, font={"size": 14},
+    title={"text": "<b>A decade rearranges itself</b>",
+           "font": {"size": 18, "family": "Inter, -apple-system, sans-serif", "color": "#16283b"}, "x": 0},
+    xaxis={"visible": False, "scaleanchor": "y", "scaleratio": 1},
+    yaxis={"visible": False, "range": [-0.50, 0.37]})
+fig.update_layout(paper_bgcolor="rgba(0,0,0,0)")
+fig.show()
+```
+
+Three things stand out.
+
+**The right-side trio sounds alike everywhere.**
+[NCP]{.party-chip style="background:#006288"}
+[Finns]{.party-chip style="background:#8a6f00"}
+[CD]{.party-chip style="background:#8E6CC8"}
+speak alike in every term, including 2019–23, when all three sat in
+opposition. Their speech is more similar than their election-compass answers
+would predict. Government status alone does not explain it: the five-party
+Marin government spoke *less* cohesively than its three-party opposition.
+
+**Close in views, far in voice.** The Left Alliance, the Social Democrats
+and the Greens —
+[Left]{.party-chip style="background:#c70853"}
+[SDP]{.party-chip style="background:#E11931"}
+[Greens]{.party-chip style="background:#3c7a10"}
+— are among the closest pairs on the election compass, yet each speaks in
+its own register.
+
+**In 2023–27 the two dividing lines coincide for the first time.** The
+right-side trio is now the core of the government, the left-green parties
+lead the opposition, and the pairs across that line have become the most
+separable pairs in parliament: 0.66 on average, against 0.45 two terms ago.
+That coincidence is what produces the step in the first figure. The extremes
+put numbers on it: the single closest pair in today's parliament is the
+Christian Democrats and the National Coalition (0.13), while the Finns Party
+against the Left and against the Greens (0.76 each) are the furthest apart,
+once the Swedish People's Party's topic-driven outlier is set aside.
+
+And the lone dot at the edge of every map? The Swedish People's Party is
+separated by its subjects — education, the Swedish language, its regions —
+rather than by conflict with anyone. The map measures speech, not
+positions.
+
+The data also rule something out: the parties pulled apart, but
+**their MPs did not fall into line**. The spread of individual MPs around
+their own party's centre has not narrowed: parliament has not filled with
+clones. The distance grew *between* the parties, not by discipline within
+them.
+
+## The words that give each party away
+
+What does the model actually latch onto? Its most party-revealing words are
+no mystery to anyone who follows Finnish politics, and that is the point:
+the machine rediscovers each party's vocabulary from scratch.
+A sample from the current term (Finnish word stems, translations in italics):
+
+::: {.word-row}
+[Finns]{.party-chip style="background:#8a6f00"}
+[maahanmuutto *immigration*]{.w} [rikos *crime*]{.w} [veronmaksaja *taxpayer*]{.w}
+:::
+::: {.word-row}
+[Left]{.party-chip style="background:#c70853"}
+[työntekijä *worker*]{.w} [pienituloinen *low-income*]{.w} [leikkaus *cut*]{.w}
+:::
+::: {.word-row}
+[SDP]{.party-chip style="background:#E11931"}
+[palkansaaja *wage earner*]{.w} [työelämä *working life*]{.w}
+:::
+::: {.word-row}
+[Greens]{.party-chip style="background:#3c7a10"}
+[ilmasto *climate*]{.w} [luonto *nature*]{.w} [päästöt *emissions*]{.w}
+:::
+::: {.word-row}
+[Centre]{.party-chip style="background:#006633"}
+[metsä *forest*]{.w} [maatalous *agriculture*]{.w} [Itä-Suomi *Eastern Finland*]{.w}
+:::
+::: {.word-row}
+[NCP]{.party-chip style="background:#006288"}
+[talous *economy*]{.w} [työ *work*]{.w} [uudistus *reform*]{.w}
+:::
+
+Role shows up too: whoever sits in opposition is recognisable by how much
+they talk about *the government* and *the prime minister*. And the model's
+confusions are as telling as its successes: the party it most often mistakes
+for another is the Christian Democrats, whose speeches it files under the
+National Coalition or the Finns Party.
+
+::: {.callout-note}
+## How we measured this
+
+We trained a classifier (TF-IDF features and logistic regression) to predict
+the speaker's party from a single speech, separately for each term and eight
+parties, from about 130,000 plenary speeches (2015 – September 2026, Parliament of
+Finland open data). Names, party names and formulaic phrases are removed
+before training. The model is always tested on **speakers it never saw during
+training**, every party gets the same amount of training data, and every
+number is reported against a shuffled-labels baseline, the precautions that
+@gentzkow2019 show are necessary before reading classifier accuracy as
+polarisation. Separability of a party pair is 2·AUC − 1 on the model's
+probabilities; our cross-check is the leave-out estimator used by
+@simola2023. The measure also passes an external check: party distances in
+speech correlate with the parties' distances on Yle's election-compass
+answers in the two most recent terms (Spearman 0.6–0.7 without the Swedish
+People's Party). Full details, robustness checks and code:
+[the technical report and repository](https://github.com/jtompuri/data-science-mini-project).
+:::
+
+## A century of perspective
+
+Is this the most divided Finnish parliament has ever been? Almost certainly
+not. @simola2023 ran essentially the same measurement over every plenary
+speech since 1907, and their century-long series peaks in the **1970s**,
+driven by the pro-Soviet far left. By that measure, Finnish
+parliamentary speech has been moderate for most of its history, far below
+the levels measured in the US Congress. Partisanship has crept
+up since the 1990s, but gently.
+
+Their series stops in **2018**, one term into our window. Our data pick up the story from there and find the clearest shift
+only after 2023. The two studies use different measures, so their levels
+cannot be laid on the same axis, but read together they suggest that
+whatever is happening in today's chamber, it is recent, and it was not yet
+visible when the century-long view was last taken.
+
+## Side notes from the transcripts
+
+<!-- TODO (team decision pending): final selection of notebook 90 items. -->
+
+The transcripts record more than words: gavel knocks, laughter,
+interjections. A few favourites:
+
+**Parliament heckles along bloc lines.** Interjections have doubled, from
+about 28 per hundred speeches in 2015–19 to 56 now, and their direction
+follows the blocs: left-green MPs heckle the National Coalition and the Finns
+Party, and vice versa.
+
+**The chamber has noticed its own drift.** Words for polarisation itself
+(*polarisaatio*, *polarisoitua* and their relatives) appear three times as
+often in the current term (22 occurrences per million words) as in 2015–19,
+and the number of different MPs using them has grown at the same rate.
+
+**Every year has its word.** The fastest-rising stems trace the decade:
+
+::: {.year-strip}
+[**2016** kiky]{.chip}
+[**2017** aktiivimalli]{.chip}
+[**2018** osakesäästötili]{.chip}
+[**2019** terapiatakuu]{.chip}
+[**2020** korona]{.chip}
+[**2021** koronapassi]{.chip}
+[**2022** Ukraina]{.chip}
+[**2023** indeksijäädytys]{.chip}
+[**2024** sovittelija]{.chip}
+[**2025** velkajarru]{.chip}
+:::
+
+**A party split you can hear.** When the Blue Reform group broke away from
+the Finns Party in 2017, its speech went with it: by language the breakaways
+sat as close to their coalition partner, the National Coalition (0.19), as to
+the party they had just left (0.21).
+
+**And the longest night** belongs to the EU recovery package: the sitting of
+12 May 2021 ended at 7.57am the next morning, and 99% of the small-hours
+speeches came from one party: the Finns Party.
+
+## What this does and does not show
+
+Three caveats belong in any honest reading. First, three terms means three
+different governments: with these data, a time trend cannot be fully
+separated from who happens to govern. Second, we measure **language, not
+opinions**, though the speech distances do match election-compass distances
+in the two most recent terms. Third, the smallest parties (the Christian
+Democrats and the Swedish People's Party) have so few MPs that their numbers
+are noisy, and the current term is still incomplete (data to September 2026).
+Unlike @simola2023, we do not control for MPs' region or gender.
+
+What the data do show is specific: a measurable, robust widening of the
+linguistic distance between Finnish parties, concentrated in the current
+term, visible within topics, and organised around two blocs whose boundary
+now coincides with the government–opposition divide.
+
+---
+
+*Data: Parliament of Finland open data (CC BY 4.0) and Yle election compasses
+(CC BY 4.0), analysed at party level only. AI (Anthropic's Claude) was used for
+research design, code, figures and text drafting; the team reviewed all output.
+Code and methods: [github.com/jtompuri/data-science-mini-project](https://github.com/jtompuri/data-science-mini-project).*
+
+<script>
+window.addEventListener("load", function () {
+  document.querySelectorAll(".term-buttons").forEach(function (rivi) {
+    var kohde = document.querySelector("#" + rivi.dataset.target + " .js-plotly-plot");
+    if (!kohde || typeof Plotly === "undefined") return;
+    rivi.querySelectorAll("button").forEach(function (nappi) {
+      nappi.addEventListener("click", function () {
+        Plotly.animate(kohde, [nappi.dataset.frame], {
+          mode: "immediate",
+          frame: { duration: 700, redraw: false },
+          transition: { duration: 700, easing: "cubic-in-out" }
+        });
+        rivi.querySelectorAll("button").forEach(function (b) { b.classList.remove("active"); });
+        nappi.classList.add("active");
+      });
+    });
+  });
+});
+</script>
+
+## References
+
+::: {#refs}
+:::
