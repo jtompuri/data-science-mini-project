@@ -236,16 +236,27 @@ a { color: var(--brand); }
 div.callout.callout-note {
   border: none;
   border-left: 5px solid var(--brand);
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
   background: var(--surface-2);
   font-size: var(--fs-m);
   line-height: 1.55;
+  padding: 1.1rem 1.5rem 1.2rem;
 }
 div.callout.callout-note .callout-header {
   background: transparent;
   color: var(--brand-deep);
   font-family: var(--sans);
   font-weight: 600;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+div.callout.callout-note .callout-body-container,
+div.callout.callout-note .callout-body {
+  padding: 0;
+}
+div.callout.callout-note .callout-body > :last-child,
+div.callout.callout-note .callout-body p:last-child {
+  margin-bottom: 0;
 }
 div.callout.callout-note .callout-icon {
   display: none;
