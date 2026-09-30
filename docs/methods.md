@@ -1,6 +1,6 @@
 # Party Map – methods notes
 
-Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we copy from them, where we deviate and why. The technical report's methods section can be written from this file. The code is in the numbered notebooks in `notebooks/` (in Finnish).
+Last updated 30 Sep 2026. Purpose: record what the reference papers do, what we copy from them, where we deviate and why. The technical report's methods section can be written from this file. The code is in the numbered notebooks in `notebooks/` (in Finnish).
 
 ## 1. What the reference papers do
 
@@ -92,11 +92,11 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
 | Stop words | NLTK Finnish | NLTK Finnish | same |
 | Stemming | "Porter2" (Snowball; presumably its Finnish algorithm) | Snowball Finnish (PyStemmer) | same; lemmatisation decided against (30 Sep), stated as a limitation |
 | Phrases | bigrams | **unigrams + bigrams** for the classifier (Finnish compounds carry meaning in single words); **bigrams only** for the leave-out estimator | classifier benefits from unigrams; leave-out replicates the paper |
-| Vocabulary thresholds | ≥100 total, ≥10 in one year, ≥10 speaker-years | same → 26,209 phrases (13,468 unigrams, 12,741 bigrams) | same |
+| Vocabulary thresholds | ≥100 total, ≥10 in one year, ≥10 speaker-years | same → 26,203 phrases (13,464 unigrams, 12,739 bigrams) | same |
 | Unit | speaker-year | **speech** for the classifier; speaker-term and speaker-year for leave-out | the project classifies individual speeches |
 | Measure | π via penalised Poisson / leave-out | (1) classifier pairwise separability; (2) GST leave-out π for every party pair | (2) validates (1) with the literature's method |
 | Bias control | permutation "random series", subsampling | permutation series for both measures; MP subsampling (80 %) for intervals; **balanced training size** per party and term | Gentzkow et al.'s warning about classifier accuracy |
-| Controls | government status, gender, region | government-vs-opposition control task; with/without ministerial speeches | gender/region not in the export (could be added from the MP register later) |
+| Controls | government status, gender, region | government-vs-opposition control task; with/without ministerial speeches | gender/region controls decided against (30 Sep); stated as a limitation |
 
 ## 3. The classifier and the measures
 
@@ -122,9 +122,9 @@ Last updated 23 Sep 2026. Purpose: record what the reference papers do, what we 
 - **Three terms, three governments.** A time trend cannot be separated from government composition. This is the main limitation of the whole study.
 - **Language, not positions.** Separability measures how differently parties speak. It matches election-compass positions in 2019–23 and 2023–27 but not in 2015–19 (§5).
 - **Stemming** is crude for Finnish. The vocabulary thresholds partly compensate. Stems can look colloquial (*kyl* = kyllä, *tääl* = täällä) although the words are standard Finnish.
-- **Region and dialect** may correlate with party through where parties draw their MPs. Simola et al. control for region; we do not yet.
+- **Region and dialect** may correlate with party through where parties draw their MPs. Simola et al. control for region; we do not (team decision 30 Sep).
 - **Small parties.** CD has 5 MPs per term, and its 3 most active MPs give about 70 % of its speeches; the SPP has 8–10 MPs. Their estimates are noisy, and their distinctive words are partly single MPs' habits (notebook 10).
-- **Party names** partly remained in the vocabulary: the cleaning pattern matches the official SDP spelling *sosialidemokraat-* but not the more common *sosiaalidemokraat-*, nor *vasemmisto* or *demareiden*. The run without style words also removes these, and the result does not change.
+- **Party-adjacent common words** (*vasemmisto*, the single word *vihreä*) remain in the vocabulary; party names proper are removed in cleaning (both SDP spellings since the 30 Sep fix, §7). The no-style-words run also removes the remaining words, and the result does not change.
 - Classifier accuracy depends on training size and the number of classes, so both are held fixed, and results are read against the permutation baseline.
 
 - **Vocabulary thresholds use the full corpus.** The vocabulary and its frequency thresholds (notebook 04) are computed over all speeches, including those later used as test folds, following Gentzkow et al. The thresholds never see party labels, so this is not target leakage, but it is a design choice to state.
@@ -148,21 +148,21 @@ Page numbers: Simola et al. = ACE Discussion Paper 160 (May 2023, the version in
 | hyphens | to spaces, p. 47 | deleted, p. 1311 | to spaces (as Simola) | – |
 | stop words | list p. 49 | Snowball list, pp. 1311–1312 | identical list (229/229 words) | – |
 | Snowball stemming | p. 47 ("Porter2") | p. 1312 (English Porter2) | Snowball Finnish; Porter2 is the name of Snowball's English algorithm | – |
-| names, party names, *arvoisa puhemies*, months, procedural phrases | p. 48 | p. 1312 | removed as words with a break marker | same effect; known gap: *sosiaalidemokraat-*, *vasemmisto* (robustness run) |
+| names, party names, *arvoisa puhemies*, months, procedural phrases | p. 48 | p. 1312 | removed as words with a break marker | same effect; remaining gap: *vasemmisto*, *vihreä* (removed in the robustness run) |
 | bigrams | p. 10 | p. 1311 | unigrams + bigrams (classifier), bigrams (leave-out) | Finnish compounds carry meaning; Simola et al. mention unigrams as an option (p. 10) |
 | thresholds 100 / 10 per year / 10 speaker-years | p. 10 | p. 1312 | same | – |
-| thresholds tightened by 10 % | – | p. 1312 | **not done** | open |
+| thresholds tightened by 10 % | – | p. 1312 | **not done** | decided 30 Sep: skipped |
 | stemming splits Finnish lemmas | p. 11 fn 10 | – | **lemmatisation not done** | decided 30 Sep: report as limitation |
 | finite-sample bias, spurious classifier accuracy | – | pp. 1308, 1310, 1314–1315 | grouped CV, balanced training, leave-out estimator | – |
 | permutation test ("random series") | p. 19 | p. 1318 | same (classifier and leave-out) | – |
 | subsampling intervals | – | p. 1321 | same (80 % of MPs) | – |
 | individual MPs' mannerisms drive partisanship | p. 19 | – | grouped CV; single-MP phrases flagged (notebook 10) | – |
-| confounders: government status, region, gender | pp. 13–14, 19–21 | p. 1316 | government: control task; region and gender **not done** | open; region affects filler words such as *sit tämmöis*, *elik tääl* (Simola p. 20), partly covered by the style-word run |
+| confounders: government status, region, gender | pp. 13–14, 19–21 | p. 1316 | government: control task; region and gender **not controlled** (decided 30 Sep) | region affects filler words such as *sit tämmöis*, *elik tääl* (Simola p. 20), partly covered by the style-word run |
 | transcripts keep regional speech | p. 9 | – | limitation stated | – |
 | fixed vocabulary favours older phrases | p. 11 | – | limitation stated (2023–27 incomplete) | – |
 | within- vs. between-topic partisanship | – | p. 1326 | notebook 11 (topics as speeches, not phrases) | – |
 
-## 5. Key results (23 Sep 2026)
+## 5. Key results (30 Sep 2026, after the name-leak fix)
 
 All numbers are in `results/summary_tables.md` (notebook 08), which is the single source for the report. Finnish walk-through: notebook 07.
 
@@ -191,10 +191,10 @@ Parties increasingly speak differently *about the same topic*. Part of this can 
 - Party map 2023–27: NCP, Finns and CD form a tight cluster (0.13–0.25). The Left and Greens are at the opposite side, and SDP and Centre are apart from both. The SPP is separate in every term, probably because of its topics.
 
 **Secondary results.**
-- *Within-party diversity:* absolute spread is flat or slightly up (0.041 → 0.053); relative spread falls (0.77 → 0.51) because the denominator, the distance between parties, grows. It is Finding 1 at MP level, not an independent result. The defensible statement is that MPs did not become more alike; the parties pulled apart. The compass could not validate the measure (rho −0.62, −0.40, −0.14).
+- *Within-party diversity:* absolute spread is flat or slightly up (0.041 → 0.053); relative spread falls (0.76 → 0.51) because the denominator, the distance between parties, grows. It is Finding 1 at MP level, not an independent result. The defensible statement is that MPs did not become more alike; the parties pulled apart. The compass could not validate the measure (rho −0.48, −0.40, −0.14).
 - *Speech vs. positions:* rho 0.08 / 0.47 / 0.48 (8 parties) and 0.21 / 0.60 / 0.71 without the SPP (Mantel p 0.20 / 0.004 / 0.003). The link is not stronger in 2023 than in 2019 (leave-out: 0.59 → 0.42), and compass questions change, so levels are not compared.
 - *Distinctive words* (notebook 10) illustrate the findings: topics (immigration for the Finns, climate for the Greens, regions for the Centre) and roles (opposition parties talk about the government).
-- *Appendix only:* Blue Reform is closest to NCP (0.20) and the Finns (0.21); elected candidates are closer to the party line than non-elected ones (−0.09, −0.11, p < 0.0005).
+- *Appendix only:* Blue Reform is closest to NCP (0.19) and the Finns (0.21); elected candidates are closer to the party line than non-elected ones (−0.09, −0.11, p < 0.0005).
 
 ## 6. Method notes for the supporting analyses
 
