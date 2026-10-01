@@ -247,7 +247,8 @@ def karttajalki(kausi):
         textposition=nimiopaikat(xy), textfont={"size": 14, "color": "#222c36"},
         marker={"size": 22, "color": [config.PARTY_COLORS[p] for p in config.MAIN_PARTIES],
                 "line": {"width": 2.5, "color": "white"}},
-        hovertemplate="%{text}<extra></extra>", showlegend=False)
+        customdata=[config.PARTY_NAMES_EN[p] for p in config.MAIN_PARTIES],
+        hovertemplate="%{customdata}<extra></extra>", showlegend=False)
 
 fig = go.Figure(
     data=[karttajalki(KAUDET[-1])],
