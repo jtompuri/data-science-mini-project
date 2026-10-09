@@ -340,10 +340,7 @@ A sample from the current term (Finnish word stems, translations in italics):
 :::
 
 Role shows up too: whoever sits in opposition is recognisable by how much
-they talk about *the government* and *the prime minister*. And the model's
-confusions are as telling as its successes: the party it most often mistakes
-for another is the Christian Democrats, whose speeches it files under the
-National Coalition or the Finns Party.
+they talk about *the government* and *the prime minister*.
 
 ::: {.callout-note}
 ## How we measured this
